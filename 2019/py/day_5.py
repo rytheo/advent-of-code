@@ -1,8 +1,7 @@
 from pathlib import Path
-from typing import Tuple, List
 
 
-def get_op(value) -> Tuple[int, List[int]]:
+def get_op(value) -> tuple[int, list[int]]:
     opcode = value % 100
     modes = [(value // (10**i)) % 10 for i in range(2,5)]
     return opcode, modes

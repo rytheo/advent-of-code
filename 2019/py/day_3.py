@@ -1,7 +1,7 @@
 import itertools as it
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import List, Optional
+from typing import Optional
 
 
 @dataclass
@@ -42,8 +42,8 @@ class Intersect:
 
 @dataclass
 class Wire:
-    verticals: List[Line] = field(default_factory=list)
-    horizontals: List[Line] = field(default_factory=list)
+    verticals: list[Line] = field(default_factory=list)
+    horizontals: list[Line] = field(default_factory=list)
 
 
 def main():
