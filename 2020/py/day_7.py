@@ -16,7 +16,7 @@ def main():
     for line in text.splitlines():
         outer, inner = line.split(" contain ")
         outer = outer.rsplit(' ', maxsplit=1)[0]
-        rules[outer] = {m.group(2): int(m.group(1)) for m in re.finditer(r"(\d+) (.+?) bags?[,.]", inner)}
+        rules[outer] = {m[2]: int(m[1]) for m in re.finditer(r"(\d+) (.+?) bags?[,.]", inner)}
     print("Part 1:", sum(bag_contains(rules, c, "shiny gold") for c in rules))
     print("Part 2:", bag_count(rules, "shiny gold") - 1)
 
