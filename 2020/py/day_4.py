@@ -11,7 +11,7 @@ hrange = {
 
 
 def valid(passport: str, check_values: bool) -> bool:
-    data = dict(pair.split(':') for pair in re.split(r'\s', passport))
+    data = dict(pair.split(':') for pair in passport.split())
     if not check_values:
         return data.keys() >= fields
     try:
