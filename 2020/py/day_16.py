@@ -15,7 +15,7 @@ def find_pair(tracker: dict) -> tuple[str, int]:
 
 def main():
     text = (Path(__file__).parent / "../input/input_16.txt").read_text()
-    rules_text, your_text, nearby_text = re.split("\n\n.+:\n", text)
+    rules_text, your_text, nearby_text = re.split(r"\n\n.+:\n", text)
     # Parse rules
     rules = {}
     for line in rules_text.splitlines():
