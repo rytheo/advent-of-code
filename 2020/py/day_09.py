@@ -3,7 +3,7 @@ from pathlib import Path
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_9.txt").read_text()
+    text = (Path(__file__).parent / "../input/input_09.txt").read_text()
     nums = [int(n) for n in text.splitlines()]
     for i, n in enumerate(nums):
         if i < 25:

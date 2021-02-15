@@ -2,7 +2,7 @@ from pathlib import Path
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_1.txt").read_text()
+    text = (Path(__file__).parent / "../input/input_01.txt").read_text()
     module_fuel = 0
     total_fuel = 0
     for line in text.splitlines():

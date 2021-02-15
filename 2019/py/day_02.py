@@ -20,7 +20,7 @@ def run(program: list) -> int:
 
 def main():
     # Read in the program
-    text = (Path(__file__).parent / "../input/input_2.txt").read_text()
+    text = (Path(__file__).parent / "../input/input_02.txt").read_text()
     program = [int(x) for x in text.split(',')]
     # Part 1
     program[1] = 12

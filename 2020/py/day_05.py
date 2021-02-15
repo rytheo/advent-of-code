@@ -6,7 +6,7 @@ def seat_id(seat):
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_5.txt").read_text()
+    text = (Path(__file__).parent / "../input/input_05.txt").read_text()
     seat_ids = sorted(seat_id(line) for line in text.splitlines())
     print("Part 1:", seat_ids[-1])
     for i, sid in enumerate(seat_ids[1:]):

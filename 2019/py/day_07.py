@@ -1,4 +1,6 @@
+import itertools as it
 from pathlib import Path
+from typing import Generator
 
 
 def get_op(value) -> tuple[int, list[int]]:
@@ -7,15 +9,13 @@ def get_op(value) -> tuple[int, list[int]]:
     return opcode, modes
 
 
-def run(program: list, inputs: list) -> list:
+def run(program: list) -> Generator[int, int, None]:
     tape = program.copy()
-    inputs = iter(inputs)
-    outputs = []
     i = 0
     while True:
         opcode, modes = get_op(tape[i])
-        if opcode == 99:  # Halt execution
-            return outputs
+        if opcode == 99:  # Halt
+            return
         elif opcode == 1:  # Add
             a, b, c = tape[i+1:i+4]
             a, b = [x if mode else tape[x] for x, mode in zip((a, b), modes)]
@@ -26,13 +26,13 @@ def run(program: list, inputs: list) -> list:
             a, b = [x if mode else tape[x] for x, mode in zip((a, b), modes)]
             tape[c] = a * b
             i += 4
-        elif opcode == 3:  # Write
+        elif opcode == 3:  # Input
             a = tape[i+1]
-            tape[a] = next(inputs)
+            tape[a] = yield
             i += 2
         elif opcode == 4:  # Output
             a = tape[i+1]
-            outputs.append(a if modes[0] else tape[a])
+            yield a if modes[0] else tape[a]
             i += 2
         elif opcode == 5:  # Jump if true
             a, b = tape[i+1:i+3]
@@ -56,12 +56,46 @@ def run(program: list, inputs: list) -> list:
             raise SyntaxError(f'Unknown opcode: {opcode}')
 
 
+def try_combo_linear(program: list, phases: tuple) -> int:
+    signal = 0
+    for phase in phases:
+        amp = run(program)  # Construct generator
+        next(amp)  # Start generator
+        amp.send(phase)  # Provide phase
+        signal = amp.send(signal)
+    return signal
+
+
+def try_combo_loop(program: list, phases: tuple) -> int:
+    signals = [0] * len(phases)
+    amps = []
+    for phase in phases:
+        amps.append(amp := run(program))
+        next(amp)  # Start generator
+        amp.send(phase)  # Provide phase
+    i = 0
+    loop = True
+    while loop or i > 0:
+        try:
+            sig = amps[i].send(signals[i-1])
+            signals[i] = sig
+            next(amps[i])
+        except StopIteration:
+            loop = False
+        finally:
+            i = (i + 1) % len(signals)
+    return signals[-1]
+
+
 def main():
-    # Read in the program
-    text = (Path(__file__).parent / "../input/input_5.txt").read_text()
+    # Read in the amp controller software
+    text = (Path(__file__).parent / "../input/input_07.txt").read_text()
     program = [int(x) for x in text.split(',')]
-    print("Part 1:", run(program, [1])[-1])
-    print("Part 2:", run(program, [5])[-1])
+    # Part 1
+    max_signal = max(try_combo_linear(program, combo) for combo in it.permutations(range(5)))
+    print("Part 1:", max_signal)
+    max_signal = max(try_combo_loop(program, combo) for combo in it.permutations(range(5, 10)))
+    print("Part 2:", max_signal)
 
 
 if __name__ == "__main__":

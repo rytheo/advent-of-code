@@ -28,7 +28,7 @@ def run(program: list, acc_on_loop=False) -> int:
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_8.txt").read_text()
+    text = (Path(__file__).parent / "../input/input_08.txt").read_text()
     program = []
     for line in text.strip().splitlines():
         op, n = line.split(' ')

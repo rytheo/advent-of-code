@@ -11,7 +11,7 @@ def valid_2(a, b, char, password) -> bool:
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_2.txt").read_text()
+    text = (Path(__file__).parent / "../input/input_02.txt").read_text()
     total_1 = total_2 = 0
     for line in text.splitlines():
         a, b, char, password = re.split(r"[ :-]+", line)

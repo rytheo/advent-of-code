@@ -19,7 +19,7 @@ def repeats(password: str) -> set:
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_4.txt").read_text()
+    text = (Path(__file__).parent / "../input/input_04.txt").read_text()
     start, end = map(int, text.split('-'))
     sets = [repeats(str(p)) for p in range(start, end + 1)]
     print(f"Part 1: {sum(s != {1} for s in sets)}")
