@@ -1,30 +1,34 @@
 import itertools as it
+from collections import Counter
 from pathlib import Path
 
 
 deltas = {n: {v for v in it.product((-1, 0, 1), repeat=n)} - {(0,) * n} for n in (3, 4)}
 
 
-def find_adj(cell: tuple) -> set[tuple]:
+def find_adj(cell: tuple[int]) -> set[tuple[int]]:
     return {tuple(x + d for x, d in zip(cell, delta)) for delta in deltas[len(cell)]}
 
 
-def simulate(text, n) -> int:
-    cells = set()
+def simulate(text: str, n: int) -> int:
+    active = set()
     for y, row in enumerate(text.splitlines()):
         for x, c in enumerate(row):
             if c == '#':
-                cells.add((x, y, *(0,)*(n-2)))
+                active.add((x, y, *(0,)*(n-2)))
     for _ in range(6):
-        future = cells.copy()
-        for cell in cells.union(*(find_adj(c) for c in cells)):
-            neighbors = sum(tuple(x + d for x, d in zip(cell, delta)) in cells for delta in deltas[n])
-            if cell in cells and not (neighbors == 2 or neighbors == 3):
-                future.remove(cell)
-            elif cell not in cells and neighbors == 3:
+        future = set()
+        # Track all cells next to active cells
+        activity = Counter()
+        for cell in active:
+            for adj in find_adj(cell):
+                activity[adj] += 1
+        # Keep cells based on adjacency counts
+        for cell, count in activity.items():
+            if count == 3 or count == 2 and cell in active:
                 future.add(cell)
-        cells = future
-    return len(cells)
+        active = future
+    return len(active)
 
 
 def main():
