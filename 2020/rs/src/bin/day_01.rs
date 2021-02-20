@@ -20,8 +20,8 @@ fn find(vals: &[u64], sum: u64, prod: u64, depth: usize) -> Option<u64> {
 
 fn main() {
     let input = fs::read_to_string("../input/input_01.txt").unwrap();
-    let mut entries: Vec<u64> = input.split('\n')
-        .filter_map(|s| s.parse().ok())
+    let mut entries: Vec<u64> = input.split_terminator('\n')
+        .map(|s| s.parse().unwrap())
         .collect();
     entries.sort();
     println!("Part 1: {}", find(&entries, 0, 1, 2).unwrap());

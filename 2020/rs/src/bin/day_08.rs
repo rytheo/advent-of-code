@@ -43,7 +43,7 @@ fn run(program: &[(&str, i32)], acc_on_loop: bool) -> Option<i32> {
 
 fn main() {
     let input = fs::read_to_string("../input/input_08.txt").unwrap();
-    let mut program: Vec<_> = input.trim_end().split('\n').map(|line| {
+    let mut program: Vec<_> = input.split_terminator('\n').map(|line| {
         let tokens: Vec<_> = line.split(' ').collect();
         (tokens[0], tokens[1].parse::<i32>().unwrap())
     }).collect();

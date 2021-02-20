@@ -3,7 +3,7 @@ use std::fs;
 fn main() {
     let input = fs::read_to_string("../input/input_10.txt").unwrap();
     let mut jolts = vec![0];
-    jolts.extend(input.trim().split('\n').map(|s| s.parse::<i32>().unwrap()));
+    jolts.extend(input.split_terminator('\n').map(|s| s.parse::<i32>().unwrap()));
     jolts.sort();
     let device = jolts[jolts.len()-1] + 3;
     // Part 1

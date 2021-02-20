@@ -7,7 +7,7 @@ fn main() {
     println!("Part 1: {}", input.split("\n\n").map(|g| {
         g.chars().filter(|&c| c != '\n').collect::<HashSet<_>>().len()
     }).sum::<usize>());
-    println!("Part 2: {}", input.trim_end().split("\n\n").map(|g| {
+    println!("Part 2: {}", input.trim().split("\n\n").map(|g| {
         g.split('\n').map(|p| p.chars().collect())
             .fold(alpha.clone(), |a, b| a.intersection(&b).cloned().collect())
             .len()
