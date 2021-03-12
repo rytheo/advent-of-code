@@ -12,8 +12,8 @@ fn find_pair<'a>(tracker: &HashMap<&'a str, HashSet<usize>>) -> Option<(&'a str,
 
 fn main() {
     let input = fs::read_to_string("../input/input_16.txt").unwrap();
-    let blocks: Vec<_> = input.trim().split("\n\n").collect();
-    let rules: HashMap<_, _> = blocks[0].split('\n').map(|s| {
+    let blocks: Vec<_> = input.split("\n\n").collect();
+    let rules: HashMap<_, _> = blocks[0].lines().map(|s| {
         let kv: Vec<_> = s.split(": ").collect();
         let nums: Vec<u64> = kv[1].split(&[' ', '-', 'o', 'r'][..])
             .filter_map(|n| n.parse().ok())
@@ -23,7 +23,7 @@ fn main() {
     let your_ticket: Vec<u64> = blocks[1].split(&['\n', ','][..]).skip(1)
         .map(|t| t.parse().unwrap())
         .collect();
-    let nearby_tickets: Vec<Vec<u64>> = blocks[2].split('\n').skip(1)
+    let nearby_tickets: Vec<Vec<u64>> = blocks[2].lines().skip(1)
         .map(|s| s.split(',').map(|t| t.parse().unwrap()).collect())
         .collect();
     // Determine which tickets are invalid

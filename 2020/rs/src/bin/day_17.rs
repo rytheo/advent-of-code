@@ -9,7 +9,7 @@ fn find_adj(deltas: &Vec<Vec<i32>>, cell: &Vec<i32>) -> Vec<Vec<i32>> {
 
 fn simulate(text: &str, deltas: &Vec<Vec<i32>>) -> usize {
     let mut active = HashSet::new();
-    for (y, row) in text.split('\n').enumerate() {
+    for (y, row) in text.lines().enumerate() {
         for (x, c) in row.chars().enumerate() {
             if c == '#' {
                 match deltas[0].len() == 3 {

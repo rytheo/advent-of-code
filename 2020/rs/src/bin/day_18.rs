@@ -64,7 +64,7 @@ fn eval(expr: &[Token], advanced: bool) -> u64 {
 
 fn main() {
     let input = fs::read_to_string("../input/input_18.txt").unwrap();
-    let exprs: Vec<Vec<_>> = input.split_terminator('\n').map(|s| {
+    let exprs: Vec<Vec<_>> = input.lines().map(|s| {
         s.chars().filter_map(|c| match c {
             ' ' => None,
             '(' => Some(LeftParen),

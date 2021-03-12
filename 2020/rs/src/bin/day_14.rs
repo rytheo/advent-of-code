@@ -55,7 +55,7 @@ fn run(program: &[&str], advanced: bool) -> u64 {
 
 fn main() {
     let input = fs::read_to_string("../input/input_14.txt").unwrap();
-    let program: Vec<_> = input.split_terminator('\n').collect();
+    let program: Vec<_> = input.lines().collect();
     println!("Part 1: {}", run(&program, false));
     println!("Part 2: {}", run(&program, true));
 }

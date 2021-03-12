@@ -3,7 +3,7 @@ use std::fs;
 
 fn main() {
     let input = fs::read_to_string("../input/input_13.txt").unwrap();
-    let lines: Vec<_> = input.split('\n').collect();
+    let lines: Vec<_> = input.lines().collect();
     // Part 1
     let start: u64 = lines[0].parse().unwrap();
     let bus_data: HashMap<u64, u64> = lines[1].split(',')

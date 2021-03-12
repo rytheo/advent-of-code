@@ -12,7 +12,7 @@ fn bag_count(rules: &HashMap<&str, HashMap<&str, u32>>, colour: &str) -> u32 {
 
 fn main() {
     let input = fs::read_to_string("../input/input_07.txt").unwrap();
-    let rules: HashMap<_, _> = input.split_terminator('\n').map(|line| {
+    let rules: HashMap<_, _> = input.lines().map(|line| {
         let key = line.split(" bags contain ").next().unwrap();
         let counts: HashMap<_, _> = line.match_indices(char::is_numeric).map(|(i, s)| {
             let end = i + line[i..].find(" bag").unwrap();
