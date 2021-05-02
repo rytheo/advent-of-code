@@ -9,7 +9,7 @@ def main():
     program = [int(x) for x in text.split(',')]
     # Run with each system ID
     for i, sys_id in enumerate([1, 5]):
-        cpu = CPU(program.copy())
+        cpu = CPU(program)
         cpu.input.append(sys_id)
         cpu.run()
         print(f"Part {i + 1}: {cpu.output[-1]}")

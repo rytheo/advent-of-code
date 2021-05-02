@@ -6,10 +6,10 @@ from intcode import CPU
 
 def try_combo(program: list[int], phases: tuple[int, ...], loop: bool) -> int:
     # Setup amps
-    amps = [CPU(program.copy())]
+    amps = [CPU(program)]
     # Each amp's output is the next amp's input
     for i in range(1, 5):
-        amps.append(CPU(program.copy(), input=amps[i-1].output))
+        amps.append(CPU(program, input=amps[i-1].output))
         amps[i].input.append(phases[i])
     if loop:
         amps[0].input = amps[-1].output

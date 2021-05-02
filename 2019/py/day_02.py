@@ -9,14 +9,14 @@ def main():
     text = (Path(__file__).parent / "../input/input_02.txt").read_text()
     program = [int(x) for x in text.split(',')]
     # Part 1
-    cpu = CPU(program.copy())
-    cpu.mem[1:3] = 12, 2
+    cpu = CPU(program)
+    cpu.mem[1], cpu.mem[2] = 12, 2
     cpu.run()
     print("Part 1:", cpu.mem[0])
     # Part 2: Find the inputs that will produce 19690720
     for noun, verb in it.product(range(100), repeat=2):
         cpu = CPU(program.copy())
-        cpu.mem[1:3] = noun, verb
+        cpu.mem[1], cpu.mem[2] = noun, verb
         cpu.run()
         if cpu.mem[0] == 19690720:
             print("Part 2:", 100 * noun + verb)
