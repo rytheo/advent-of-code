@@ -1,5 +1,6 @@
 use rug::{Assign, Integer};
 use std::collections::{HashMap, VecDeque};
+
 pub struct CPU {
     pub mem: HashMap<Integer, Integer>,
     pub ip: Integer,
@@ -38,7 +39,7 @@ impl CPU {
                 }
                 5 | 6 => { // Jump if true/false
                     let p = self.get_params(2, &modes, false);
-                    if op == 5 && p[0] > 0 || op == 6 && p[0] <= 0 {
+                    if op == 5 && p[0] != 0 || op == 6 && p[0] == 0 {
                         self.ip.assign(&p[1]);
                     } else {
                         self.ip += 3;
