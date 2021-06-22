@@ -1,4 +1,4 @@
-use gcd::Gcd;
+use num_integer::Integer;
 use std::fs;
 
 fn scan(grid: &[&[u8]], loc: (isize, isize), vectors: &[(isize, isize)], vaporize: bool) -> usize {
@@ -27,7 +27,7 @@ fn main() {
     let mut vectors = vec![];
     for y in -h..h {
         for x in -w..w {
-            if x.unsigned_abs().gcd(y.unsigned_abs()) == 1 {
+            if x.unsigned_abs().gcd(&y.unsigned_abs()) == 1 {
                 vectors.push((y, x));
             }
         }

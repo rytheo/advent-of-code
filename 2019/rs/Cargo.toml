@@ -4,6 +4,6 @@ version = "0.1.0"
 edition = "2018"
 
 [dependencies]
-gcd = "2.0"
 itertools = "0.10"
+num-integer = "0.1"
 rug = { version = "1.12", default-features = false, features = ["integer"] }
