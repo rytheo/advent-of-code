@@ -10,7 +10,7 @@ def main():
     vectors = {v for v in it.product(range(-h, h), range(-w, w)) if gcd(*v) == 1}
     vectors = sorted(vectors, key=lambda v: -atan2(v[1], v[0]))
 
-    def scan(loc, vaporize: bool) -> int:
+    def scan(loc: tuple[int, int], vaporize: bool) -> int:
         total = 0
         for dy, dx in it.cycle(vectors) if vaporize else vectors:
             y, x = loc[0] + dy, loc[1] + dx
