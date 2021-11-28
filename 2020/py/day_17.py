@@ -6,7 +6,7 @@ from pathlib import Path
 deltas = {n: {v for v in it.product((-1, 0, 1), repeat=n)} - {(0,) * n} for n in (3, 4)}
 
 
-def find_adj(cell: tuple[int]) -> set[tuple[int]]:
+def find_adj(cell: tuple[int, ...]) -> set[tuple[int, ...]]:
     return {tuple(x + d for x, d in zip(cell, delta)) for delta in deltas[len(cell)]}
 
 
@@ -17,17 +17,13 @@ def simulate(text: str, n: int) -> int:
             if c == '#':
                 active.add((x, y, *(0,)*(n-2)))
     for _ in range(6):
-        future = set()
         # Track all cells next to active cells
         activity = Counter()
         for cell in active:
             for adj in find_adj(cell):
                 activity[adj] += 1
         # Keep cells based on adjacency counts
-        for cell, count in activity.items():
-            if count == 3 or count == 2 and cell in active:
-                future.add(cell)
-        active = future
+        active = {c for c, a in activity.items() if a == 3 or a == 2 and c in active}
     return len(active)
 
 
