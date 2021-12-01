@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import itertools as it
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -11,7 +13,7 @@ class Line:
     x1: int
     y1: int
     length: int
-    prev: 'Line' = None
+    prev: Optional[Line] = None
 
     def __post_init__(self):
         if self.prev:
@@ -29,11 +31,13 @@ class Intersect:
 
     def __post_init__(self):
         self.dist = abs(self.x) + abs(self.y)
-        self.cost = (abs(self.y - self.v.y0) + self.v.prev.length
-                   + abs(self.x - self.h.x0) + self.h.prev.length)
+        self.cost = (
+            abs(self.y - self.v.y0) + (self.v.prev.length if self.v.prev else 0)
+            + abs(self.x - self.h.x0) + (self.h.prev.length if self.h.prev else 0)
+        )
 
     @staticmethod
-    def try_from_lines(v: Line, h: Line) -> Optional['Intersect']:
+    def try_from_lines(v: Line, h: Line) -> Optional[Intersect]:
         x0, x1 = sorted([h.x0, h.x1])
         y0, y1 = sorted([v.y0, v.y1])
         if x0 < v.x0 < x1 and y0 < h.y0 < y1:
