@@ -11,7 +11,7 @@ fn find_pair<'a>(tracker: &HashMap<&'a str, HashSet<usize>>) -> Option<(&'a str,
 }
 
 fn main() {
-    let input = fs::read_to_string("../input/input_16.txt").unwrap();
+    let input = fs::read_to_string("../input/2020/input_16.txt").unwrap();
     let blocks: Vec<_> = input.split("\n\n").collect();
     let rules: HashMap<_, _> = blocks[0].lines().map(|s| {
         let kv: Vec<_> = s.split(": ").collect();

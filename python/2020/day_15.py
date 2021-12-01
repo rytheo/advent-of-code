@@ -14,7 +14,7 @@ def play(text: str, target: int) -> int:
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_15.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2020/input_15.txt").read_text()
     print("Part 1:", play(text, 2020))
     print("Part 2:", play(text, 30_000_000))
 

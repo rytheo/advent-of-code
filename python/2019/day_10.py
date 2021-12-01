@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_10.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2019/input_10.txt").read_text()
     grid = [list(s) for s in text.strip().splitlines()]
     w, h = len(grid[0]), len(grid)
     vectors = {v for v in it.product(range(-h, h), range(-w, w)) if gcd(*v) == 1}

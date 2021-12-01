@@ -26,7 +26,7 @@ def combat(d1: list, d2: list, recursive: bool) -> tuple[int, int]:
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_22.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2020/input_22.txt").read_text()
     decks = {}
     for block in text.split('\n\n'):
         header, *nums = block.splitlines()

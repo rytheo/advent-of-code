@@ -10,7 +10,7 @@ def path_to_com(body: str, orbits: dict) -> list:
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_06.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2019/input_06.txt").read_text()
     orbits = {}
     # Read in orbital data
     for line in text.splitlines():

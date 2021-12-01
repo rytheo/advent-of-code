@@ -78,7 +78,7 @@ fn run_2(steps: &[(Direction, i32)]) -> i32 {
 }
 
 fn main() {
-    let input = fs::read_to_string("../input/input_12.txt").unwrap();
+    let input = fs::read_to_string("../input/2020/input_12.txt").unwrap();
     let steps: Vec<_> = input.lines().map(|s| {
         let dir = match &s[..1] {
             "E" => Card(East),

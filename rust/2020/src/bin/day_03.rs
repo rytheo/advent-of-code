@@ -14,7 +14,7 @@ fn tree_count(grid: &[&[u8]], dx: usize, dy: usize) -> usize {
 }
 
 fn main() {
-    let input = fs::read_to_string("../input/input_03.txt").unwrap();
+    let input = fs::read_to_string("../input/2020/input_03.txt").unwrap();
     let grid: Vec<_> = input.lines()
         .filter(|s| s.len() > 0)
         .map(|s| s.as_bytes())

@@ -47,7 +47,7 @@ def find_period(moons: list[Moon], dim: int) -> int:
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_12.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2019/input_12.txt").read_text()
     moons = parse_moons(text)
     # Part 1
     for _ in range(1000):

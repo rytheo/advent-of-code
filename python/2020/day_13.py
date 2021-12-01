@@ -3,7 +3,7 @@ from pathlib import Path
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_13.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2020/input_13.txt").read_text()
     # Part 1
     start, timeline = text.splitlines()
     start = int(start)

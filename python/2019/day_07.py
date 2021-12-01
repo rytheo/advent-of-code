@@ -24,7 +24,7 @@ def try_combo(program: list[int], phases: tuple[int, ...], loop: bool) -> int:
 
 def main():
     # Read in the amp controller software
-    text = (Path(__file__).parent / "../input/input_07.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2019/input_07.txt").read_text()
     program = [int(x) for x in text.split(',')]
     # Part 1
     max_signal = max(try_combo(program, combo, False) for combo in it.permutations(range(5)))

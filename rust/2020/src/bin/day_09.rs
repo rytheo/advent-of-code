@@ -10,7 +10,7 @@ fn invalid_index(nums: &[i64]) -> Option<i64> {
 }
 
 fn main() {
-    let input = fs::read_to_string("../input/input_09.txt").unwrap();
+    let input = fs::read_to_string("../input/2020/input_09.txt").unwrap();
     let nums: Vec<i64> = input.lines().map(|s| s.parse().unwrap()).collect();
     let invalid = invalid_index(&nums).unwrap();
     println!("Part 1: {}", invalid);

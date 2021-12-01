@@ -47,7 +47,7 @@ def simulate(grid, advanced) -> int:
     return sum(seat == '#' for row in grid for seat in row)
 
 def main():
-    text = (Path(__file__).parent / "../input/input_11.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2020/input_11.txt").read_text()
     grid = [list(line) for line in text.splitlines()]
     print("Part 1: ", simulate(grid, False))
     print("Part 2: ", simulate(grid, True))

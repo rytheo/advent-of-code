@@ -32,7 +32,7 @@ def do_moves(seq, n, big) -> Cup:
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_23.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2020/input_23.txt").read_text()
     seq = [int(x) for x in text.strip()]
     cup = do_moves(seq, 100, False)
     print("Part 1: ", end='')

@@ -2,7 +2,7 @@ use std::collections::{HashMap, HashSet};
 use std::fs;
 
 fn main() {
-    let text = fs::read_to_string("../input/input_03.txt").unwrap();
+    let text = fs::read_to_string("../input/2018/input_03.txt").unwrap();
     let mut intact = HashSet::new();
     let mut claims: HashMap<(usize, usize), Vec<usize>> = HashMap::new();
     for line in text.lines() {

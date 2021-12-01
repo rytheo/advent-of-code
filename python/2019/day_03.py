@@ -47,7 +47,7 @@ class Wire:
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_03.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2019/input_03.txt").read_text()
     wires = []
     # Loop over each wire path
     for path in text.splitlines():

@@ -2,7 +2,7 @@ from pathlib import Path
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_08.txt").read_text().strip()
+    text = (Path(__file__).parent / "../../input/2019/input_08.txt").read_text().strip()
     width, height = 25, 6
     lsize = width * height
     layers = [[int(x) for x in text[i:i+lsize]] for i in range(0, len(text), lsize)]

@@ -56,7 +56,7 @@ fn find_period(moons: &mut [Moon], dim: usize) -> u64 {
 }
 
 fn main() {
-    let text = fs::read_to_string("../input/input_12.txt").unwrap();
+    let text = fs::read_to_string("../input/2019/input_12.txt").unwrap();
     let moons: Vec<_> = text.lines().map(|line| {
         let pos = line.split(|c| "<xyz=, >".contains(c))
             .filter_map(|s| s.parse().ok())

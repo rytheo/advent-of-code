@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_19.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2020/input_19.txt").read_text()
     rules, messages = text.strip().split('\n\n')
     patterns = dict(line.split(': ') for line in rules.splitlines())
 

@@ -16,7 +16,7 @@ fn single_diff(a: &str, b: &str) -> Option<usize> {
 }
 
 fn main() {
-    let text = fs::read_to_string("../input/input_02.txt").unwrap();
+    let text = fs::read_to_string("../input/2018/input_02.txt").unwrap();
     let (mut two, mut three) = (0, 0);
     let ids: Vec<_> = text.lines().collect();
     for id in &ids {

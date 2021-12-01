@@ -2,7 +2,7 @@ from pathlib import Path
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_10.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2020/input_10.txt").read_text()
     jolts = [0] + sorted(int(x) for x in text.splitlines())
     device = jolts[-1] + 3
     # Part 1

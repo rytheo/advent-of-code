@@ -75,7 +75,7 @@ def orient(image) -> int:
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_20.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2020/input_20.txt").read_text()
     box = [Tile(raw) for raw in text.strip().split('\n\n')]
     # Start from any tile
     puzzle = [box.pop()]

@@ -5,7 +5,7 @@ const HEIGHT: usize = 6;
 const LSIZE: usize = WIDTH * HEIGHT;
 
 fn main() {
-    let text = fs::read_to_string("../input/input_08.txt").unwrap();
+    let text = fs::read_to_string("../input/2019/input_08.txt").unwrap();
     let data = text.trim().as_bytes();
     let layers: Vec<_> = (0..data.len()).step_by(LSIZE)
         .map(|i| &data[i..i+LSIZE])

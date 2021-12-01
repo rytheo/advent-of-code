@@ -40,7 +40,7 @@ def run_2(steps) -> int:
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_12.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2020/input_12.txt").read_text()
     steps = [(t[0], int(t[1:])) for t in text.splitlines()]
     print("Part 1:", run_1(steps))
     print("Part 2:", run_2(steps))

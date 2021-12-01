@@ -40,7 +40,7 @@ impl Intersect {
 }
 
 fn main() {
-    let text = fs::read_to_string("../input/input_03.txt").unwrap();
+    let text = fs::read_to_string("../input/2019/input_03.txt").unwrap();
     // Parse wire paths from input file
     let wires: Vec<_> = text.lines().map(|line| {
         let mut wire = Wire { horis: vec![], verts: vec![] };

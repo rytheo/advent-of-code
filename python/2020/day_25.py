@@ -2,7 +2,7 @@ from pathlib import Path
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_25.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2020/input_25.txt").read_text()
     public_keys = [int(x) for x in text.splitlines()]
     base, loop_size = 1, 0
     while base != public_keys[0]:

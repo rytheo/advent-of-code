@@ -26,7 +26,7 @@ def find_adj(tile: tuple[int, int, int]) -> set[tuple[int, int, int]]:
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_24.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2020/input_24.txt").read_text()
     flipped = set()
     for line in text.splitlines():
         tile = tile_from_str(line)

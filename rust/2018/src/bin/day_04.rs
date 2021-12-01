@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::fs;
 
 fn main() {
-    let text = fs::read_to_string("../input/input_04.txt").unwrap();
+    let text = fs::read_to_string("../input/2018/input_04.txt").unwrap();
     let mut logs: Vec<_> = text.lines().collect();
     logs.sort();
     let mut tracker: HashMap<u32, HashMap<u32, u32>> = HashMap::new();

@@ -7,7 +7,7 @@ fn dist(a: (i32, i32), b: (i32, i32)) -> u32 {
 }
 
 fn main() {
-    let text = fs::read_to_string("../input/input_06.txt").unwrap();
+    let text = fs::read_to_string("../input/2018/input_06.txt").unwrap();
     // Collect points and save min/max coords
     let mut areas: HashMap<(i32, i32), u32> = HashMap::new();
     let (mut x0, mut y0, mut x1, mut y1) = (i32::MAX, i32::MAX, 0, 0);

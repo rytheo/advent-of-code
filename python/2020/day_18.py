@@ -11,7 +11,7 @@ class I:
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_18.txt").read_text().replace('*', '-')
+    text = (Path(__file__).parent / "../../input/2020/input_18.txt").read_text().replace('*', '-')
     text = re.sub(r"\d+", "I(\g<0>)", text)
     print("Part 1:", sum((eval(line) for line in text.splitlines()), start=I(0)))
     text = text.replace('+', '*')

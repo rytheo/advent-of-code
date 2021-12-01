@@ -63,7 +63,7 @@ fn simulate(mut grid: Vec<Vec<char>>, advanced: bool) -> usize {
 }
 
 fn main() {
-    let input = fs::read_to_string("../input/input_11.txt").unwrap();
+    let input = fs::read_to_string("../input/2020/input_11.txt").unwrap();
     let grid: Vec<Vec<char>> = input.lines().map(|s| s.chars().collect()).collect();
     println!("Part 1: {}", simulate(grid.clone(), false));
     println!("Part 2: {}", simulate(grid, true));

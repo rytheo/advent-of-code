@@ -21,7 +21,7 @@ fn scan(grid: &[&[u8]], loc: (isize, isize), vectors: &[(isize, isize)], vaporiz
 }
 
 fn main() {
-    let text = fs::read_to_string("../input/input_10.txt").unwrap();
+    let text = fs::read_to_string("../input/2019/input_10.txt").unwrap();
     let grid: Vec<_> = text.lines().map(|s| s.as_bytes()).collect();
     let (h, w) = (grid.len() as isize, grid[0].len() as isize);
     let mut vectors = vec![];

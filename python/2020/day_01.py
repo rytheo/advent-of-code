@@ -10,7 +10,7 @@ def find(iterable, r):
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_01.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2020/input_01.txt").read_text()
     entries = [int(line) for line in text.splitlines()]
     print("Part 1:", find(entries, 2))
     print("Part 2:", find(entries, 3))

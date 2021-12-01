@@ -30,7 +30,7 @@ def valid(passport: str, check_values: bool) -> bool:
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_04.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2020/input_04.txt").read_text()
     passports = [p.strip() for p in text.split('\n\n')]
     print("Part 1:", sum(valid(p, False) for p in passports))
     print("Part 2:", sum(valid(p, True) for p in passports))

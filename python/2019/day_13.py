@@ -39,7 +39,7 @@ def update_tiles(cpu: CPU, tiles: dict[Point, int]) -> tuple[Optional[int], Opti
 
 def run(stdscr: Window) -> tuple[int, int]:
     stdscr.clear()
-    text = (Path(__file__).parent / "../input/input_13.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2019/input_13.txt").read_text()
     # Replace the paddle row with walls
     pattern = r"1,(0,)+3,(0,)+1,"
     if m := re.search(pattern, text):

@@ -23,7 +23,7 @@ fn valid(passport: &HashMap<&str, &str>, check_values: bool) -> bool {
 }
 
 fn main() {
-    let input = fs::read_to_string("../input/input_04.txt").unwrap();
+    let input = fs::read_to_string("../input/2020/input_04.txt").unwrap();
     let passports: Vec<HashMap<_, _>> = input.split("\n\n")
         .map(|s| s.split_whitespace().map(|t| (&t[..3], &t[4..])).collect())
         .collect();

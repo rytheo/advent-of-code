@@ -36,7 +36,7 @@ fn simulate(text: &str, deltas: &Vec<Vec<i32>>) -> usize {
 }
 
 fn main() {
-    let input = fs::read_to_string("../input/input_17.txt").unwrap();
+    let input = fs::read_to_string("../input/2020/input_17.txt").unwrap();
     let d = [0, -1, 1];
     let d3: Vec<_> = (1..27).map(|i| vec![d[i % 3], d[i / 3 % 3], d[i / 9 % 3]]).collect();
     let d4: Vec<_> = (1..81).map(|i| vec![d[i % 3], d[i / 3 % 3], d[i / 9 % 3], d[i / 27 % 3]]).collect();

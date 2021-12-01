@@ -1,7 +1,7 @@
 use std::fs;
 
 fn main() {
-    let input = fs::read_to_string("../input/input_05.txt").unwrap();
+    let input = fs::read_to_string("../input/2020/input_05.txt").unwrap();
     let mut seat_ids: Vec<_> = input.lines().map(|s| {
         let binary = s
             .replace(|c| "BR".contains(c), "1")

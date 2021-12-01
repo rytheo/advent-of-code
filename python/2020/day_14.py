@@ -41,7 +41,7 @@ def run(program: list, write_fn: Callable) -> int:
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_14.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2020/input_14.txt").read_text()
     program = text.splitlines()
     print("Part 1:", run(program, write_1))
     print("Part 2:", run(program, write_2))

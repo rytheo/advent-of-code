@@ -22,7 +22,7 @@ fn valid(p: u32, strict: bool) -> bool {
 }
 
 fn main() {
-    let text = fs::read_to_string("../input/input_04.txt").unwrap();
+    let text = fs::read_to_string("../input/2019/input_04.txt").unwrap();
     let (left, right) = text.trim().split_once('-').unwrap();
     let low: u32 = left.parse().unwrap();
     let high: u32 = right.parse().unwrap();

@@ -23,7 +23,7 @@ fn try_combo(program: &[Integer], phases: &[Integer], feedback: bool) -> Integer
 }
 
 fn main() {
-    let text = fs::read_to_string("../input/input_07.txt").unwrap();
+    let text = fs::read_to_string("../input/2019/input_07.txt").unwrap();
     let program: Vec<_> = text.trim().split(',').map(|s| s.parse().unwrap()).collect();
     for (i, range, feedback) in vec![(1, 0..5, false), (2, 5..10, true)].into_iter() {
         let max_signal = range.map_into().permutations(5)

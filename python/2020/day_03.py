@@ -12,7 +12,7 @@ def tree_count(grid, dx, dy):
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_03.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2020/input_03.txt").read_text()
     grid = text.splitlines()
     slopes = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]
     print("Part 1:", tree_count(grid, 3, 1))

@@ -30,7 +30,7 @@ fn count_matches(patterns: &HashMap<&str, &str>, messages: &[&str]) -> usize {
 }
 
 fn main() {
-    let input = fs::read_to_string("../input/input_19.txt").unwrap();
+    let input = fs::read_to_string("../input/2020/input_19.txt").unwrap();
     let blocks: Vec<_> = input.split("\n\n").collect();
     let mut patterns: HashMap<_, _> = blocks[0].lines().map(|s| {
         let mut kv = s.split(": ");

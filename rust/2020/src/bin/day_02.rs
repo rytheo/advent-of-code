@@ -1,7 +1,7 @@
 use std::fs;
 
 fn main() {
-    let input = fs::read_to_string("../input/input_02.txt").unwrap();
+    let input = fs::read_to_string("../input/2020/input_02.txt").unwrap();
     let mut total_1 = 0u32;
     let mut total_2 = 0u32;
     for line in input.lines().filter(|s| s.len() > 0) {

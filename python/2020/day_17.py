@@ -28,7 +28,7 @@ def simulate(text: str, n: int) -> int:
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_17.txt").read_text().strip()
+    text = (Path(__file__).parent / "../../input/2020/input_17.txt").read_text().strip()
     print("Part 1:", simulate(text, 3))
     print("Part 2:", simulate(text, 4))
 

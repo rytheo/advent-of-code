@@ -35,7 +35,7 @@ fn paint(program: &[Integer], start_white: bool) -> HashMap<(isize, isize), Inte
 }
 
 fn main() {
-    let text = fs::read_to_string("../input/input_11.txt").unwrap();
+    let text = fs::read_to_string("../input/2019/input_11.txt").unwrap();
     let program: Vec<_> = text.trim().split(',').map(|s| s.parse().unwrap()).collect();
     println!("Part 1: {}", paint(&program, false).len());
     println!("Part 2:");

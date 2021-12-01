@@ -11,7 +11,7 @@ def bag_count(rules, colour) -> int:
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_07.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2020/input_07.txt").read_text()
     rules = {}
     for line in text.splitlines():
         outer, inner = line.split(" bags contain ")

@@ -2,7 +2,7 @@ from pathlib import Path
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_21.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2020/input_21.txt").read_text()
     recipes = []
     candidates = {}
     for line in text.splitlines():

@@ -1,7 +1,7 @@
 use std::fs;
 
 fn main() {
-    let input = fs::read_to_string("../input/input_10.txt").unwrap();
+    let input = fs::read_to_string("../input/2020/input_10.txt").unwrap();
     let mut jolts = vec![0];
     jolts.extend(input.lines().map(|s| s.parse::<i32>().unwrap()));
     jolts.sort();

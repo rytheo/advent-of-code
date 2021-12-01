@@ -2,7 +2,7 @@ use std::collections::{HashMap, HashSet};
 use std::fs;
 
 fn main() {
-    let text = fs::read_to_string("../input/input_06.txt").unwrap();
+    let text = fs::read_to_string("../input/2019/input_06.txt").unwrap();
     let orbits: HashMap<_, _> = text.lines().map(|line| {
         let (parent, child) = line.split_once(')').unwrap();
         (child, parent)

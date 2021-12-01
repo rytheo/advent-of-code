@@ -36,7 +36,7 @@ def paint(program: list[int], start_white: bool = False) -> dict[tuple[int, int]
 
 
 def main():
-    text = (Path(__file__).parent / "../input/input_11.txt").read_text()
+    text = (Path(__file__).parent / "../../input/2019/input_11.txt").read_text()
     program = [int(x) for x in text.strip().split(",")]
     # Print the number of painted panels
     print("Part 1:", len(paint(program)))

@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::fs;
 
 fn main() {
-    let input = fs::read_to_string("../input/input_13.txt").unwrap();
+    let input = fs::read_to_string("../input/2020/input_13.txt").unwrap();
     let lines: Vec<_> = input.lines().collect();
     // Part 1
     let start: u64 = lines[0].parse().unwrap();
