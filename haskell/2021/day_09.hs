@@ -7,10 +7,8 @@ type Point = (Int, Int)
 
 -- | Return a list of points adjacent to the given one.
 findAdjacent :: Point -> Map.Map Point Int -> [Point]
-findAdjacent (y, x) grid = do
-    (dy, dx) <- [(0, 1), (1, 0), (0, -1), (-1, 0)]
-    let adj = (y + dy, x + dx)
-    [adj | Map.member adj grid]
+findAdjacent (y, x) grid = filter (`Map.member` grid)
+    [(y + dy, x + dx) | (dy, dx) <- [(0, 1), (1, 0), (0, -1), (-1, 0)]]
 
 -- | Return a list of points that are lower than all their adjacent points.
 lowPoints :: Map.Map Point Int -> [Point]

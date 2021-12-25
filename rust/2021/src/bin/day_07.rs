@@ -5,7 +5,7 @@ fn min_fuel(crabs: &[i32], constant: bool) -> i32 {
     (lower..=upper).map(|pos| {
         crabs.iter().map(|&x| {
             let dist = (x - pos).abs();
-            if constant { dist } else { dist * (dist + 1) / 2}
+            if constant { dist } else { dist * (dist + 1) / 2 }
         }).sum()
     }).min().unwrap()
 }

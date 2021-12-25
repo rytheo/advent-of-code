@@ -23,9 +23,9 @@ fn basin_size(grid: &HashMap<Point, u32>, low: Point) -> usize {
 
 fn main() {
     let input = fs::read_to_string("../input/2021/input_09.txt").unwrap();
-    let grid: HashMap<_, _> = input.lines().enumerate().map(|(y, line)| {
+    let grid: HashMap<_, _> = input.lines().enumerate().flat_map(|(y, line)| {
         line.bytes().enumerate().map(move |(x, b)| ((y as isize, x as isize), (b - b'0') as u32))
-    }).flatten().collect();
+    }).collect();
     let low_points: Vec<_> = grid.keys().filter(|(y, x)| {
         DELTAS.iter().all(|&(dy, dx)| {
             let adj = (y + dy, x + dx);

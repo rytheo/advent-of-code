@@ -26,9 +26,9 @@ fn shortest_path(grid: &HashMap<(isize, isize), u32>) -> u32 {
 
 fn main() {
     let input = fs::read_to_string("../input/2021/input_15.txt").unwrap();
-    let mut grid: HashMap<_, _> = input.lines().enumerate().map(|(y, line)| {
+    let mut grid: HashMap<_, _> = input.lines().enumerate().flat_map(|(y, line)| {
         line.bytes().enumerate().map(move |(x, b)| ((x as isize, y as isize), (b - b'0') as u32))
-    }).flatten().collect();
+    }).collect();
     println!("Part 1: {}", shortest_path(&grid));
     // Make the grid bigger
     let height = grid.keys().map(|(_, y)| *y).max().unwrap() + 1;

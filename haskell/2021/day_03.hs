@@ -14,7 +14,7 @@ findPower :: [[Int]] -> Int
 findPower bins = gamma * epsilon
     where
     deltas = getDeltas bins
-    gamma = binToInt [if d > 0 then 1 else 0 | d <- deltas]
+    gamma = binToInt [if d >= 0 then 1 else 0 | d <- deltas]
     epsilon = binToInt [if d < 0 then 1 else 0 | d <- deltas]
 
 -- | Compute the o2 (True) or co2 (False) rating from a list of binary strings.

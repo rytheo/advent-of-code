@@ -12,6 +12,6 @@ run adv ((dir, val):cmds) (aim, x, y) = run adv cmds $ case (adv, dir) of
 main :: IO ()
 main = do
     text <- readFile "../../input/2021/input_02.txt"
-    let cmds = [(s, read v :: Int) | s:v:_ <- map words $ lines text]
+    let cmds = [(s, read v :: Int) | s:v:_ <- words <$> lines text]
     putStrLn $ "Part 1: " ++ show (run False cmds (0, 0, 0))
     putStrLn $ "Part 2: " ++ show (run True cmds (0, 0, 0))
