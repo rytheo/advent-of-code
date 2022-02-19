@@ -1,5 +1,5 @@
-use std::collections::HashMap;
 use std::fs;
+use counter::Counter;
 
 fn single_diff(a: &str, b: &str) -> Option<usize> {
     let (a, b) = (a.as_bytes(), b.as_bytes());
@@ -20,10 +20,7 @@ fn main() {
     let (mut two, mut three) = (0, 0);
     let ids: Vec<_> = text.lines().collect();
     for id in &ids {
-        let mut counter: HashMap<_, u32> = HashMap::new();
-        for b in id.bytes() {
-            *counter.entry(b).or_default() += 1;
-        }
+        let counter: Counter<_> = id.bytes().collect();
         if counter.values().any(|&v| v == 2) {
             two += 1;
         }

@@ -1,8 +1,8 @@
 use std::fs;
-use std::collections::HashMap;
+use counter::Counter;
 
 fn count_intersections(lines: &[(i32, i32, i32, i32)], diag_ok: bool) -> usize {
-    let mut grid: HashMap<(i32, i32), usize> = HashMap::new();
+    let mut grid: Counter<(i32, i32)> = Counter::new();
     for &(x1, y1, x2, y2) in lines {
         let dx = (x2 - x1).clamp(-1, 1);
         let dy = (y2 - y1).clamp(-1, 1);
@@ -11,7 +11,7 @@ fn count_intersections(lines: &[(i32, i32, i32, i32)], diag_ok: bool) -> usize {
         }
         let (mut x, mut y) = (x1, y1);
         for _ in 0..=(x2 - x1).abs().max((y2 - y1).abs()) {
-            *grid.entry((x, y)).or_default() += 1;
+            grid[&(x, y)] += 1;
             x += dx;
             y += dy;
         }

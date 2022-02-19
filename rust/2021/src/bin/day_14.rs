@@ -1,25 +1,20 @@
 use std::fs;
 use std::collections::HashMap;
+use counter::Counter;
 
 fn simulate(rule_map: &HashMap<(u8, u8), u8>, bytes: &[u8], steps: usize) -> usize {
     // Track the number of elements and pairs
-    let mut elements: HashMap<_, usize> = HashMap::new();
-    for &byte in bytes {
-        *elements.entry(byte).or_default() += 1;
-    }
-    let mut pairs: HashMap<_, usize> = HashMap::new();
-    for i in 1..bytes.len() {
-        *pairs.entry((bytes[i-1], bytes[i])).or_default() += 1;
-    }
+    let mut elements: Counter<_> = bytes.iter().copied().collect();
+    let mut pairs: Counter<_> = bytes.iter().copied().zip(bytes.iter().copied().skip(1)).collect();
     // Run simulation
     for _ in 0..steps {
         let prev = pairs;
-        pairs = HashMap::new();
+        pairs = Counter::new();
         for (p @ (a, b), n) in prev {
             let c = rule_map[&p];
-            *elements.entry(c).or_default() += n;
+            elements[&c] += n;
             for pair in [(a, c), (c, b)] {
-                *pairs.entry(pair).or_default() += n;
+                pairs[&pair] += n;
             }
         }
     }

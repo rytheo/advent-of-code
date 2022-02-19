@@ -1,5 +1,6 @@
 use std::collections::{HashMap, HashSet};
 use std::fs;
+use counter::Counter;
 
 fn find_adj(deltas: &Vec<Vec<i32>>, cell: &Vec<i32>) -> Vec<Vec<i32>> {
     deltas.iter().map(|delta| {
@@ -21,10 +22,10 @@ fn simulate(text: &str, deltas: &Vec<Vec<i32>>) -> usize {
     }
     for _ in 0..6 {
         // Track all cells next to active cells
-        let mut activity: HashMap<Vec<i32>, u32> = HashMap::new();
+        let mut activity: Counter<Vec<i32>> = Counter::new();
         for cell in &active {
             for adj in find_adj(deltas, cell) {
-                *activity.entry(adj).or_default() += 1;
+                activity[&adj] += 1;
             }
         }
         // Compute next cycle based on adjacency counts
