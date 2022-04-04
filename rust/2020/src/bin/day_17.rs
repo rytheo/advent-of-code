@@ -1,6 +1,6 @@
-use std::collections::{HashMap, HashSet};
+use std::collections::HashSet;
 use std::fs;
-use counter::Counter;
+use aoc::counter::Counter;
 
 fn find_adj(deltas: &Vec<Vec<i32>>, cell: &Vec<i32>) -> Vec<Vec<i32>> {
     deltas.iter().map(|delta| {

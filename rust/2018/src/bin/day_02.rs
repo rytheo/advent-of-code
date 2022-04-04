@@ -1,5 +1,5 @@
 use std::fs;
-use counter::Counter;
+use aoc::counter::Counter;
 
 fn single_diff(a: &str, b: &str) -> Option<usize> {
     let (a, b) = (a.as_bytes(), b.as_bytes());

@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 use std::fs;
-use counter::Counter;
+use aoc::counter::Counter;
 
 fn main() {
     let text = fs::read_to_string("../input/2018/input_04.txt").unwrap();

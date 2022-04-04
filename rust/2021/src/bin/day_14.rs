@@ -1,6 +1,6 @@
 use std::fs;
 use std::collections::HashMap;
-use counter::Counter;
+use aoc::counter::Counter;
 
 fn simulate(rule_map: &HashMap<(u8, u8), u8>, bytes: &[u8], steps: usize) -> usize {
     // Track the number of elements and pairs

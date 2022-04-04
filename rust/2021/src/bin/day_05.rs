@@ -1,5 +1,5 @@
 use std::fs;
-use counter::Counter;
+use aoc::counter::Counter;
 
 fn count_intersections(lines: &[(i32, i32, i32, i32)], diag_ok: bool) -> usize {
     let mut grid: Counter<(i32, i32)> = Counter::new();

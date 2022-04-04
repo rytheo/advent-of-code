@@ -1,5 +1,5 @@
 use std::fs;
-use counter::Counter;
+use aoc::counter::Counter;
 
 fn simulate(nums: &[u8], days: usize) -> usize {
     let mut fish_counter: Counter<_> = nums.iter().cloned().collect();
