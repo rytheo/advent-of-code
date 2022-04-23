@@ -1,7 +1,8 @@
 use std::fs;
 use std::collections::{HashMap, HashSet};
+use aoc::geometry::{Vector, vecN};
 
-fn step(octopi: &mut HashMap<(isize, isize), u8>) -> usize {
+fn step(octopi: &mut HashMap<Vector<2>, u8>) -> usize {
     // Increase all energy by 1
     // Any octopus with energy > 9 flashes
     let mut to_flash = vec![];
@@ -11,22 +12,16 @@ fn step(octopi: &mut HashMap<(isize, isize), u8>) -> usize {
             to_flash.push(point);
         }
     }
-    // Increase adjacent energy by 1
+    // Increase neighboring energy by 1
     // If this causes an octopus to have energy > 9, it also flashes
     let mut flashed = HashSet::new();
-    while let Some(point @ (y, x)) = to_flash.pop() {
+    while let Some(point) = to_flash.pop() {
         flashed.insert(point);
-        for dy in -1..=1 {
-            for dx in -1..=1 {
-                if dy == 0 && dx == 0 {
-                    continue;
-                }
-                let adj = (y + dy, x + dx);
-                if let Some(energy) = octopi.get_mut(&adj) {
-                    *energy += 1;
-                    if *energy == 10 && !flashed.contains(&adj) {
-                        to_flash.push(adj);
-                    }
+        for nbr in point.neighbors() {
+            if let Some(energy) = octopi.get_mut(&nbr) {
+                *energy += 1;
+                if *energy == 10 && !flashed.contains(&nbr) {
+                    to_flash.push(nbr);
                 }
             }
         }
@@ -43,7 +38,7 @@ fn main() {
     let mut octopi = HashMap::new();
     for (y, line) in input.lines().enumerate() {
         for (x, digit) in line.bytes().enumerate() {
-            octopi.insert((y as isize, x as isize), digit - b'0');
+            octopi.insert(vecN!(x as i32, y as i32), digit - b'0');
         }
     }
     println!("Part 1: {}", (0..100).map(|_| step(&mut octopi)).sum::<usize>());
