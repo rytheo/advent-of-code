@@ -20,7 +20,7 @@ fn autocomplete(line: &str) -> Result<u64, u64> {
         }
     }
     // Calculate auto-completion score
-    Ok(stack.iter().rev().fold(0, |acc, &open| 5 * acc + match open {
+    Ok(stack.iter().rfold(0, |acc, &open| 5 * acc + match open {
         b'(' => 1,
         b'[' => 2,
         b'{' => 3,
