@@ -5,7 +5,7 @@ type Int = i32;
 type UInt = u32;
 
 /// An N-dimensional vector.
-#[derive(AsRef, AsMut, Clone, Copy, Debug, Hash, Index, IndexMut, IntoIterator, PartialEq, Eq)]
+#[derive(AsRef, AsMut, Clone, Copy, Debug, Hash, Index, IndexMut, IntoIterator, PartialEq, Eq, Ord, PartialOrd)]
 pub struct Vector<const N: usize> {
     arr: [Int; N]
 }
