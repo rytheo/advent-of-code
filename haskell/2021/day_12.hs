@@ -4,10 +4,10 @@ import qualified Data.Map as Map
 import qualified Data.Set as Set
 
 -- | Return the number of paths from the current node to the end.
-explore :: Bool -> Map.Map String (Set.Set String) -> Set.Set String -> String -> Int
+explore :: Bool -> Map.Map String [String] -> Set.Set String -> String -> Int
 explore _ _ _ "end" = 1
 explore extraTime graph visited current = sum $ do
-    adj <- Set.elems $ graph Map.! current
+    adj <- graph Map.! current
     -- Explore all large or unvisited caves
     if all Char.isUpper adj || adj `Set.notMember` visited
         then return $ explore extraTime graph (Set.insert adj visited) adj
@@ -19,11 +19,11 @@ explore extraTime graph visited current = sum $ do
 main :: IO ()
 main = do
     text <- readFile "../../input/2021/input_12.txt"
-    let graph = Map.fromListWith Set.union $ do
+    let graph = Map.fromListWith (++) $ do
         line <- lines text
         let a:b:_ = Split.splitOn "-" line
         (start, end) <- [(a, b), (b, a)]
-        return (start, Set.singleton end)
+        return (start, [end])
     let visited = Set.singleton "start"
     putStrLn $ "Part 1: " ++ show (explore False graph visited "start")
-    putStrLn $ "Part 1: " ++ show (explore True graph visited "start")
+    putStrLn $ "Part 2: " ++ show (explore True graph visited "start")
