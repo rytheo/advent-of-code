@@ -20,7 +20,7 @@ fn step(octopi: &mut HashMap<Vector<2>, u8>) -> usize {
         for nbr in point.neighbors() {
             if let Some(energy) = octopi.get_mut(&nbr) {
                 *energy += 1;
-                if *energy == 10 && !flashed.contains(&nbr) {
+                if *energy > 9 && !flashed.contains(&nbr) {
                     to_flash.push(nbr);
                 }
             }
