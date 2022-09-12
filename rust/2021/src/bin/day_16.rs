@@ -1,80 +1,77 @@
 use std::fs;
 use std::num::ParseIntError;
+use std::iter;
 
-enum PacketData {
-    Literal(u64),
-    Operator {
-        type_id: u8,
-        packets: Vec<Packet>,
+struct PacketMeta {
+    version_sum: u32,
+    bit_length: usize,
+    value: u64,
+}
+
+struct Cursor<'a> {
+    slice: &'a str,
+    bits_read: usize,
+}
+
+impl<'a> Cursor<'a> {
+    fn new(s: &'a str) -> Self {
+        Self { slice: s, bits_read: 0 }
+    }
+
+    fn read(&mut self, n: usize) -> &'a str {
+        let (taken, rest) = self.slice.split_at(n);
+        self.slice = rest;
+        self.bits_read += n;
+        taken
     }
 }
 
-struct Packet {
-    bit_count: usize,
-    version: u8,
-    data: PacketData,
-}
-
-fn eval(packet: &Packet) -> u64 {
-    match &packet.data {
-        PacketData::Literal(val) => *val,
-        PacketData::Operator { type_id, packets } => {
-            let vals: Vec<_> = packets.iter().map(eval).collect();
-            match type_id {
-                0 => vals.into_iter().sum(),
-                1 => vals.into_iter().product(),
-                2 => vals.into_iter().min().unwrap(),
-                3 => vals.into_iter().max().unwrap(),
-                5 => (vals[0] > vals[1]) as u64,
-                6 => (vals[0] < vals[1]) as u64,
-                7 => (vals[0] == vals[1]) as u64,
-                _ => panic!("Invalid type ID"),
-            }
-        }
-    }
-}
-
-fn version_sum(packet: &Packet) -> u32 {
-    let mut sum = packet.version as u32;
-    if let PacketData::Operator { packets, .. } = &packet.data {
-        sum += packets.iter().map(|p| version_sum(p)).sum::<u32>();
-    }
-    sum
-}
-
-fn parse_packet(bits: &str) -> Result<Packet, ParseIntError> {
-    let version = u8::from_str_radix(&bits[..3], 2)?;
-    let type_id = u8::from_str_radix(&bits[3..6], 2)?;
-    let mut i = 6;
-    let data = if type_id == 4 { // Literal
-        let mut literal_bits = String::new();
-        // Consume 5-bit chunks while the chunk prefix is 1
-        // Include the last chunk whose prefix is 0
+fn parse_packet(bits: &str) -> Result<PacketMeta, ParseIntError> {
+    let mut cur = Cursor::new(bits);
+    let mut version_sum = u32::from_str_radix(cur.read(3), 2)?;
+    let type_id = u8::from_str_radix(cur.read(3), 2)?;
+    let value = if type_id == 4 {
+        let mut value = 0;
         let mut prefix = "1";
         while prefix == "1" {
-            prefix = &bits[i..i+1];
-            literal_bits.push_str(&bits[i+1..i+5]);
-            i += 5;
+            prefix = cur.read(1);
+            value = (value << 4) + u64::from_str_radix(cur.read(4), 2)?;
         }
-        PacketData::Literal(u64::from_str_radix(&literal_bits, 2)?)
-    } else { // Operator
-        let mut packets = vec![];
-        let length_type_id = &bits[i..i+1];
-        i += 1;
+        value
+    } else {
+        let length_type_id = cur.read(1);
         let next_n = if length_type_id == "0" { 15 } else { 11 };
-        let val = usize::from_str_radix(&bits[i..i+next_n], 2)?;
-        i += next_n;
-        // Parse packets until the limit is reached
+        let val = usize::from_str_radix(cur.read(next_n), 2)?;
         let mut subpacket_bits = 0;
-        while if length_type_id == "0" { subpacket_bits < val } else { packets.len() < val } {
-            let packet = parse_packet(&bits[i..])?;
-            i += packet.bit_count;
-            subpacket_bits += packet.bit_count;
-            packets.push(packet);
+        let mut subpacket_count = 0;
+        let mut vals = iter::from_fn(|| {
+            let tracker = if length_type_id == "0" { subpacket_bits } else { subpacket_count };
+            if tracker >= val {
+                return None;
+            }
+            let meta = parse_packet(cur.slice).unwrap();
+            version_sum += meta.version_sum;
+            cur.read(meta.bit_length);
+            subpacket_bits += meta.bit_length;
+            subpacket_count += 1;
+            Some(meta.value)
+        });
+        match type_id {
+            0 => vals.sum(),
+            1 => vals.product(),
+            2 => vals.min().unwrap(),
+            3 => vals.max().unwrap(),
+            5 => (vals.next().unwrap() > vals.next().unwrap()) as u64,
+            6 => (vals.next().unwrap() < vals.next().unwrap()) as u64,
+            7 => (vals.next().unwrap() == vals.next().unwrap()) as u64,
+            _ => panic!("Invalid type ID"),
         }
-        PacketData::Operator { type_id, packets }
     };
-    Ok(Packet { bit_count: i, version, data })
+    Ok(PacketMeta {
+        version_sum,
+        bit_length: cur.bits_read,
+        value,
+    })
 }
 
 fn main() {
@@ -82,7 +79,7 @@ fn main() {
     let bits: String = input.chars()
         .filter_map(|c| c.to_digit(16).map(|x| format!("{:04b}", x)))
         .collect();
-    let packet = parse_packet(&bits).unwrap();
-    println!("Part 1: {}", version_sum(&packet));
-    println!("Part 2: {}", eval(&packet));
+    let meta = parse_packet(&bits).unwrap();
+    println!("Part 1: {}", meta.version_sum);
+    println!("Part 2: {}", meta.value);
 }
