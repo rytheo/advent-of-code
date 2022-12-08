@@ -4,13 +4,9 @@ function parse_ranges(line::AbstractString)::Tuple{UnitRange{UInt}, UnitRange{UI
     s1:e1, s2:e2
 end
 
-function full_overlap(r1::UnitRange, r2::UnitRange)::Bool
-    r1 ∩ r2 in [r1, r2]
-end
+full_overlap(r1::UnitRange, r2::UnitRange)::Bool = r1 ∩ r2 in [r1, r2]
 
-function partial_overlap(r1::UnitRange, r2::UnitRange)::Bool
-    length(r1 ∩ r2) > 0
-end
+partial_overlap(r1::UnitRange, r2::UnitRange)::Bool = length(r1 ∩ r2) > 0
 
 function main()
     text = read("input/2022/input_04.txt", String)
