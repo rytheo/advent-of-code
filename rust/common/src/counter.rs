@@ -1,11 +1,12 @@
 use std::borrow::Borrow;
 use std::collections::HashMap;
 use std::hash::Hash;
-use std::ops::{Deref, DerefMut, Index, IndexMut};
+use std::ops::{Index, IndexMut};
+use derive_more::{Deref, DerefMut};
 
 static ZERO: usize = 0;
 
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Debug, Default, Deref, DerefMut)]
 pub struct Counter<T> {
     map: HashMap<T, usize>
 }
@@ -13,20 +14,6 @@ pub struct Counter<T> {
 impl<T> Counter<T> {
     pub fn new() -> Self {
         Counter { map: HashMap::new() }
-    }
-}
-
-impl<T> Deref for Counter<T> {
-    type Target = HashMap<T, usize>;
-
-    fn deref(&self) -> &Self::Target {
-        &self.map
-    }
-}
-
-impl<T> DerefMut for Counter<T> {
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        &mut self.map
     }
 }
 
