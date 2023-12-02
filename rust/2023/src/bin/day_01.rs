@@ -1,5 +1,4 @@
 use regex::Regex;
-use std::fs;
 
 const WORDS: [&'static str; 9] = [
     "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
@@ -57,7 +56,7 @@ fn find_hard(s: &str, re_forward: &Regex, re_reverse: &Regex) -> u32 {
 }
 
 fn main() {
-    let input = fs::read_to_string("../input/2023/input_01.txt").unwrap();
+    let input = aoc::read_input("2023/input_01.txt");
     let re_forward = init_regex(Direction::Forward);
     let re_reverse = init_regex(Direction::Reverse);
     let p1 = input.trim().lines().map(find_easy).sum::<u32>();
