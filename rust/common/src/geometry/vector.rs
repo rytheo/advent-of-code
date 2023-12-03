@@ -5,7 +5,7 @@ type Int = i32;
 type UInt = u32;
 
 /// An N-dimensional vector.
-#[derive(AsRef, AsMut, Clone, Copy, Debug, Hash, Index, IndexMut, IntoIterator, PartialEq, Eq, Ord, PartialOrd)]
+#[derive(AsRef, AsMut, Clone, Copy, Hash, Index, IndexMut, IntoIterator, PartialEq, Eq, Ord, PartialOrd)]
 pub struct Vector<const N: usize> {
     arr: [Int; N]
 }
@@ -69,6 +69,7 @@ impl<const N: usize> Vector<N> {
     }
 }
 
+
 /// Adjacent points iterator.
 ///
 /// This struct is created by the `adjacents` method on `Vector`.
@@ -94,7 +95,6 @@ impl<const N: usize> Iterator for Adjacents<N> {
         Some(point)
     }
 }
-
 
 /// Neighboring points iterator.
 ///
@@ -131,6 +131,12 @@ impl<const N: usize> Neg for Vector<N> {
             *val = val.neg();
         }
         self
+    }
+}
+
+impl<const N: usize> std::fmt::Debug for Vector<N> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:?}", self.arr)
     }
 }
 
