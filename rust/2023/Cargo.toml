@@ -5,4 +5,5 @@ edition = "2021"
 
 [dependencies]
 aoc = { path = "../common" }
+num = "0.4.1"
 regex = "^1"
