@@ -16,7 +16,7 @@ fn tree_count(grid: &[&[u8]], dx: usize, dy: usize) -> usize {
 fn main() {
     let input = fs::read_to_string("../input/2020/input_03.txt").unwrap();
     let grid: Vec<_> = input.lines()
-        .filter(|s| s.len() > 0)
+        .filter(|s| !s.is_empty())
         .map(|s| s.as_bytes())
         .collect();
     let slopes = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)];

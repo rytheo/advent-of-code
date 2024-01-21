@@ -19,7 +19,7 @@ fn required_amounts(s: &str) -> [usize; 3] {
 }
 
 fn validate_game(amounts: &[usize; 3]) -> bool {
-    amounts.into_iter().zip(&[12, 13, 14]).all(|(a, b)| a <= b)
+    amounts.iter().zip(&[12, 13, 14]).all(|(a, b)| a <= b)
 }
 
 fn main() {

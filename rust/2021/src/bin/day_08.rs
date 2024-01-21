@@ -26,7 +26,7 @@ fn parse_entry(entry: &str) -> usize {
     let be = &sigs[&8] - &sigs[&3];
     let d = &(&sigs[&4] - &sigs[&1]) - &be;
     sigs.insert(0, &sigs[&8] - &d);
-    sigs.insert(6, len2sig[&6].iter().filter(|&s| *s != sigs[&0] && *s != sigs[&9]).next().unwrap().clone());
+    sigs.insert(6, len2sig[&6].iter().find(|&s| *s != sigs[&0] && *s != sigs[&9]).unwrap().clone());
     sigs.insert(5, &sigs[&9] & &sigs[&6]);
     let ce = &sigs[&9] ^ &sigs[&6];
     sigs.insert(2, &adg | &ce);

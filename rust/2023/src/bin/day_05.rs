@@ -10,7 +10,7 @@ impl RangeMap {
     fn get(&self, key: u64) -> Option<u64> {
         self.src
             .contains(&key)
-            .then(|| key - self.src.start + self.dst_start)
+            .then_some(key - self.src.start + self.dst_start)
     }
 }
 

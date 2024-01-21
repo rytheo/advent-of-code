@@ -1,6 +1,6 @@
 use itertools::Itertools;
 use num_integer::Integer;
-use std::fs;
+use std::{fs, cmp::Ordering};
 
 #[derive(Clone)]
 struct Moon {
@@ -26,12 +26,16 @@ fn step(moons: &mut [Moon], dims: &[usize]) {
     // Apply gravity
     for (a, b) in (0..moons.len()).tuple_combinations() {
         for &i in dims {
-            if moons[a].pos[i] < moons[b].pos[i] {
-                moons[a].vel[i] += 1;
-                moons[b].vel[i] -= 1;
-            } else if moons[a].pos[i] > moons[b].pos[i] {
-                moons[a].vel[i] -= 1;
-                moons[b].vel[i] += 1;
+            match moons[a].pos[i].cmp(&moons[b].pos[i]) {
+                Ordering::Less => {
+                    moons[a].vel[i] += 1;
+                    moons[b].vel[i] -= 1;
+                }
+                Ordering::Greater => {
+                    moons[a].vel[i] -= 1;
+                    moons[b].vel[i] += 1;
+                }
+                Ordering::Equal => {},
             }
         }
     }

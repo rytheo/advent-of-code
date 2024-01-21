@@ -1,8 +1,4 @@
-use std::{
-    array,
-    collections::{HashMap, HashSet},
-    ops::Neg,
-};
+use std::{array, collections::HashMap, ops::Neg};
 
 use aoc::{geometry::Vector, vecN};
 

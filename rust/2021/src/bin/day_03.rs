@@ -17,7 +17,7 @@ fn find_rating(lines: &[&str], o2: bool) -> u32 {
         let deltas = get_deltas(&lines);
         // If 1 is most frequent or equal, keep 1 for o2 and 0 for co2
         let keep = if (deltas[i] >= 0) == o2 { b'1' } else { b'0' };
-        lines = lines.into_iter().filter(|s| s.as_bytes()[i] == keep).collect();
+        lines.retain(|s| s.as_bytes()[i] == keep);
         i += 1;
     }
     u32::from_str_radix(lines[0], 2).unwrap()
@@ -30,7 +30,7 @@ fn main() {
     let gamma: u32 = tracker.iter().rev().enumerate()
         .map(|(i, &b)| if b > 0 { 1 << i } else { 0 })
         .sum();
-    let epsilon = !gamma & (1 << tracker.len()) - 1;
+    let epsilon = !gamma & ((1 << tracker.len()) - 1);
     println!("Part 1: {}", gamma * epsilon);
     let oxygen = find_rating(&lines, true);
     let co2 = find_rating(&lines, false);

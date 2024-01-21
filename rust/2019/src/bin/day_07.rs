@@ -6,7 +6,7 @@ use aoc_2019::CPU;
 
 fn try_combo(program: &[Integer], phases: &[Integer], feedback: bool) -> Integer {
     let mut amps: Vec<_> = (0..5).map(|i| {
-        let mut cpu = CPU::new(&program);
+        let mut cpu = CPU::new(program);
         cpu.input.push_back(phases[i].clone());
         cpu
     }).collect();

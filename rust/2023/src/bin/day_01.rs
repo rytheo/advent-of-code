@@ -1,6 +1,6 @@
 use regex::Regex;
 
-const WORDS: [&'static str; 9] = [
+const WORDS: [&str; 9] = [
     "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
 ];
 

@@ -33,7 +33,7 @@ impl Intersect {
         let (x0, x1) = if h.start.0 < h.end.0 { (h.start.0, h.end.0) } else { (h.end.0, h.start.0) };
         let (y0, y1) = if v.start.1 < v.end.1 { (v.start.1, v.end.1) } else { (v.end.1, v.start.1) };
         match (x0..x1).contains(&v.start.0) && (y0..y1).contains(&h.start.1) {
-            true => Some(Intersect { x: v.start.0, y: h.start.1, v: v.clone(), h: h.clone() }),
+            true => Some(Intersect { x: v.start.0, y: h.start.1, v: *v, h: *h }),
             false => None,
         }
     }

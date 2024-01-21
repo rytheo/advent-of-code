@@ -5,7 +5,7 @@ use std::fs;
 use aoc_2019::CPU;
 
 fn paint(program: &[Integer], start_white: bool) -> HashMap<(isize, isize), Integer> {
-    let mut robot = CPU::new(&program);
+    let mut robot = CPU::new(program);
     let (mut x, mut y, mut direction) = (0isize, 0isize, 0i32);
     let mut panels = HashMap::new();
     if start_white {

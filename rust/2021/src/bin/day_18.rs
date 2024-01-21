@@ -97,7 +97,7 @@ fn parse_element(chars: &mut Peekable<Chars>) -> Element {
         }
         Some(c) => {
             let mut digits = String::from(c);
-            while chars.peek().unwrap().is_digit(10) {
+            while chars.peek().unwrap().is_ascii_digit() {
                 digits.push(chars.next().unwrap());
             }
             Number(digits.parse().unwrap())

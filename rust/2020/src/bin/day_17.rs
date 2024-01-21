@@ -2,13 +2,13 @@ use std::collections::HashSet;
 use std::fs;
 use aoc::counter::Counter;
 
-fn find_adj(deltas: &Vec<Vec<i32>>, cell: &Vec<i32>) -> Vec<Vec<i32>> {
+fn find_adj(deltas: &[Vec<i32>], cell: &[i32]) -> Vec<Vec<i32>> {
     deltas.iter().map(|delta| {
         cell.iter().zip(delta).map(|(x, d)| x + d).collect()
     }).collect()
 }
 
-fn simulate(text: &str, deltas: &Vec<Vec<i32>>) -> usize {
+fn simulate(text: &str, deltas: &[Vec<i32>]) -> usize {
     let mut active = HashSet::new();
     for (y, row) in text.lines().enumerate() {
         for (x, c) in row.chars().enumerate() {

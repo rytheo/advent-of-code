@@ -33,6 +33,6 @@ fn main() {
         let bytes = pair.as_bytes();
         ((bytes[0], bytes[1]), elem.as_bytes()[0])
     }).collect();
-    println!("Part 1: {}", simulate(&rule_map, &template_bytes, 10));
-    println!("Part 2: {}", simulate(&rule_map, &template_bytes, 40));
+    println!("Part 1: {}", simulate(&rule_map, template_bytes, 10));
+    println!("Part 2: {}", simulate(&rule_map, template_bytes, 40));
 }

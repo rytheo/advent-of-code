@@ -4,7 +4,7 @@ fn main() {
     let input = fs::read_to_string("../input/2020/input_02.txt").unwrap();
     let mut total_1 = 0u32;
     let mut total_2 = 0u32;
-    for line in input.lines().filter(|s| s.len() > 0) {
+    for line in input.lines().filter(|s| !s.is_empty()) {
         let tokens: Vec<_> = line.split(&[' ', '-'][..]).collect();
         let a: usize = tokens[0].parse().unwrap();
         let b: usize = tokens[1].parse().unwrap();

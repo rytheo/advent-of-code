@@ -4,7 +4,7 @@ use std::fs;
 use aoc_2019::CPU;
 
 fn run(program: &[Integer], noun: u32, verb: u32) -> Integer {
-    let mut cpu = CPU::new(&program);
+    let mut cpu = CPU::new(program);
     cpu.mem.insert(1.into(), noun.into());
     cpu.mem.insert(2.into(), verb.into());
     cpu.run();

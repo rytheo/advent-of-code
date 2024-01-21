@@ -22,6 +22,6 @@ fn react(bytes: &[u8], remove: Option<u8>) -> usize {
 fn main() {
     let text = fs::read_to_string("../input/2018/input_05.txt").unwrap();
     let bytes = text.trim().as_bytes();
-    println!("Part 1: {}", react(&bytes, None));
-    println!("Part 2: {}", (b'a'..=b'z').map(|r| react(&bytes, Some(r))).min().unwrap());
+    println!("Part 1: {}", react(bytes, None));
+    println!("Part 2: {}", (b'a'..=b'z').map(|r| react(bytes, Some(r))).min().unwrap());
 }
