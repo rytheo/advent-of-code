@@ -30,11 +30,6 @@ impl<const N: usize> Vector<N> {
         Self { arr: [0; N] }
     }
 
-    /// Returns the number of dimensions of `self`.
-    pub const fn len(&self) -> usize {
-        self.arr.len()
-    }
-
     /// Returns the Manhattan distance between `self` and `other`.
     pub fn dist_manhattan(self, other: Self) -> UInt {
         (self - other).abs().iter().map(|&x| x as UInt).sum()
