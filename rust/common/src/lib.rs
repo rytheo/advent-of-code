@@ -4,7 +4,7 @@ use std::path::{Path, PathBuf};
 pub mod counter;
 pub mod geometry;
 
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, PartialEq, Eq, Debug)]
 pub enum Part {
     One = 1,
     Two = 2,
