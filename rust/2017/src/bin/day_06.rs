@@ -16,7 +16,8 @@ fn redist(banks: &mut [u32]) {
 
 fn main() {
     let input = fs::read_to_string("../input/2017/input_06.txt").unwrap();
-    let mut banks: Vec<u32> = input.split_whitespace()
+    let mut banks: Vec<u32> = input
+        .split_whitespace()
         .map(|s| s.parse().unwrap())
         .collect();
     let mut seen = HashMap::from([(banks.clone(), 0)]);

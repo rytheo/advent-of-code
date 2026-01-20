@@ -1,6 +1,6 @@
-use std::fs;
-use std::cmp::Ordering;
 use regex::Regex;
+use std::cmp::Ordering;
+use std::fs;
 
 fn fire(vel: (i32, i32), target: (i32, i32, i32, i32)) -> Option<i32> {
     let (x0, x1, y0, y1) = target;
@@ -27,7 +27,10 @@ fn fire(vel: (i32, i32), target: (i32, i32, i32, i32)) -> Option<i32> {
 fn main() {
     let re = Regex::new(r"-?\d+").unwrap();
     let input = fs::read_to_string("../input/2021/input_17.txt").unwrap();
-    let coords: Vec<i32> = re.find_iter(&input).map(|m| m.as_str().parse().unwrap()).collect();
+    let coords: Vec<i32> = re
+        .find_iter(&input)
+        .map(|m| m.as_str().parse().unwrap())
+        .collect();
     let (x0, x1, y0, y1) = (coords[0], coords[1], coords[2], coords[3]);
     let mut heights = vec![];
     // Brute force initial velocity

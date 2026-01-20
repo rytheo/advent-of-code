@@ -1,5 +1,5 @@
-use std::fs;
 use std::collections::HashSet;
+use std::fs;
 
 fn fold_grid(grid: &mut HashSet<(u32, u32)>, axis: char, val: u32) {
     for (x, y) in grid.clone() {
@@ -17,14 +17,20 @@ fn main() {
     let input = fs::read_to_string("../input/2021/input_13.txt").unwrap();
     let (points, orders) = input.split_once("\n\n").unwrap();
     // Parse grid and instructions
-    let mut grid: HashSet<(u32, u32)> = points.lines().map(|line| {
-        let (x, y) = line.split_once(',').unwrap();
-        (x.parse().unwrap(), y.parse().unwrap())
-    }).collect();
-    let folds: Vec<(char, u32)> = orders.lines().map(|line| {
-        let (axis, val) = line.split_once('=').unwrap();
-        (axis.chars().last().unwrap(), val.parse().unwrap())
-    }).collect();
+    let mut grid: HashSet<(u32, u32)> = points
+        .lines()
+        .map(|line| {
+            let (x, y) = line.split_once(',').unwrap();
+            (x.parse().unwrap(), y.parse().unwrap())
+        })
+        .collect();
+    let folds: Vec<(char, u32)> = orders
+        .lines()
+        .map(|line| {
+            let (axis, val) = line.split_once('=').unwrap();
+            (axis.chars().last().unwrap(), val.parse().unwrap())
+        })
+        .collect();
     // Perform first fold
     let mut fold_iter = folds.into_iter();
     let (axis, val) = fold_iter.next().unwrap();

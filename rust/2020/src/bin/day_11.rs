@@ -1,14 +1,17 @@
 use std::fs;
 
-fn in_bounds(grid: &Vec<Vec<char>>, y: i32, x: i32) -> bool {
+fn in_bounds(grid: &[Vec<char>], y: i32, x: i32) -> bool {
     0 <= y && 0 <= x && (y as usize) < grid.len() && (x as usize) < grid[0].len()
 }
 
 fn neighbors(grid: &Vec<Vec<char>>, y: i32, x: i32) -> u32 {
     let mut count = 0;
-    for &y1 in &[y-1, y, y+1] {
-        for &x1 in &[x-1, x, x+1] {
-            if in_bounds(grid, y1, x1) && (y1 != y || x1 != x) && grid[y1 as usize][x1 as usize] == '#' {
+    for &y1 in &[y - 1, y, y + 1] {
+        for &x1 in &[x - 1, x, x + 1] {
+            if in_bounds(grid, y1, x1)
+                && (y1 != y || x1 != x)
+                && grid[y1 as usize][x1 as usize] == '#'
+            {
                 count += 1
             }
         }
@@ -47,7 +50,11 @@ fn simulate(mut grid: Vec<Vec<char>>, advanced: bool) -> usize {
         let mut g_prime = grid.clone();
         for y in 0..grid.len() {
             for x in 0..grid[0].len() {
-                let n = if advanced { visible(&grid, y as i32, x as i32) } else { neighbors(&grid, y as i32, x as i32) };
+                let n = if advanced {
+                    visible(&grid, y as i32, x as i32)
+                } else {
+                    neighbors(&grid, y as i32, x as i32)
+                };
                 if n == 0 && grid[y][x] == 'L' {
                     g_prime[y][x] = '#';
                     stable = false;

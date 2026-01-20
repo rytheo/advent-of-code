@@ -8,17 +8,25 @@ fn valid(p: u32, strict: bool) -> bool {
     let mut exact = false;
     let mut adj = 1;
     for i in 1..s.len() {
-        match b[i-1].cmp(&b[i]) {
+        match b[i - 1].cmp(&b[i]) {
             Ordering::Less => {
-                if adj == 2 { exact = true; }
+                if adj == 2 {
+                    exact = true;
+                }
                 adj = 1;
             }
             Ordering::Equal => adj += 1,
             Ordering::Greater => return false,
         }
-        if adj == 2 { min = true; }
+        if adj == 2 {
+            min = true;
+        }
     }
-    if strict { exact || adj == 2 } else { min }
+    if strict {
+        exact || adj == 2
+    } else {
+        min
+    }
 }
 
 fn main() {
@@ -26,6 +34,12 @@ fn main() {
     let (left, right) = text.trim().split_once('-').unwrap();
     let low: u32 = left.parse().unwrap();
     let high: u32 = right.parse().unwrap();
-    println!("Part 1: {}", (low..=high).filter(|&p| valid(p, false)).count());
-    println!("Part 2: {}", (low..=high).filter(|&p| valid(p, true)).count());
+    println!(
+        "Part 1: {}",
+        (low..=high).filter(|&p| valid(p, false)).count()
+    );
+    println!(
+        "Part 2: {}",
+        (low..=high).filter(|&p| valid(p, true)).count()
+    );
 }

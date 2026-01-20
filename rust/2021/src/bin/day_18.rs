@@ -3,8 +3,8 @@ use std::iter::Peekable;
 use std::ops::Add;
 use std::str::Chars;
 
-use Element::{Number, Pair};
 use Direction::{Left, Right};
+use Element::{Number, Pair};
 
 enum Direction {
     Left,
@@ -27,14 +27,18 @@ impl Element {
 
     fn insert(&mut self, dir: Direction, val: &mut Option<u8>) -> bool {
         match self {
-            Number(n) => if let Some(v) = val.take() {
-                *n += v;
-                true
-            } else { false }
+            Number(n) => {
+                if let Some(v) = val.take() {
+                    *n += v;
+                    true
+                } else {
+                    false
+                }
+            }
             Pair(a, b) => match dir {
                 Left => a.insert(Left, val) || b.insert(Left, val),
                 Right => b.insert(Right, val) || a.insert(Right, val),
-            }
+            },
         }
     }
 
@@ -102,13 +106,14 @@ fn parse_element(chars: &mut Peekable<Chars>) -> Element {
             }
             Number(digits.parse().unwrap())
         }
-        _ => panic!("Empty iterator")
+        _ => panic!("Empty iterator"),
     }
 }
 
 fn main() {
     let input = fs::read_to_string("../input/2021/input_18.txt").unwrap();
-    let elements: Vec<_> = input.lines()
+    let elements: Vec<_> = input
+        .lines()
         .map(|line| parse_element(&mut line.chars().peekable()))
         .collect();
     let final_sum = elements.iter().cloned().reduce(|a, b| a + b).unwrap();

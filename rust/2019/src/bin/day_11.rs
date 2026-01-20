@@ -1,5 +1,5 @@
-use std::collections::HashMap;
 use rug::Integer;
+use std::collections::HashMap;
 use std::fs;
 
 use aoc_2019::CPU;
@@ -14,14 +14,20 @@ fn paint(program: &[Integer], start_white: bool) -> HashMap<(isize, isize), Inte
     // Run until robot halts
     loop {
         // Give the robot its next colour
-        robot.input.push_back(panels.get(&(x, y)).cloned().unwrap_or_default());
+        robot
+            .input
+            .push_back(panels.get(&(x, y)).cloned().unwrap_or_default());
         if robot.run() == 99 {
             break panels;
         }
         // Paint the current tile
         panels.insert((x, y), robot.output.pop_front().unwrap());
         // Turn left or right
-        let turn = if robot.output.pop_front().unwrap() == 0 { -1 } else { 1 };
+        let turn = if robot.output.pop_front().unwrap() == 0 {
+            -1
+        } else {
+            1
+        };
         direction = (direction + turn).rem_euclid(4);
         // Move forward
         match direction {

@@ -48,8 +48,7 @@ fn main() {
         .iter()
         .enumerate()
         .flat_map(|(num, bin)| {
-            bin
-                .iter()
+            bin.iter()
                 .enumerate()
                 .map(move |(slot, lens)| (1 + num) * (1 + slot) * lens.length as usize)
         })

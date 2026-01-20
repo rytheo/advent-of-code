@@ -2,7 +2,10 @@ use std::fs;
 
 fn invalid_index(nums: &[i64]) -> Option<i64> {
     for (i, &n) in nums.iter().enumerate().skip(25) {
-        if !nums[i-25..i].iter().any(|&a| nums[i-25..i].contains(&(n - a))) {
+        if !nums[i - 25..i]
+            .iter()
+            .any(|&a| nums[i - 25..i].contains(&(n - a)))
+        {
             return Some(n);
         }
     }
@@ -25,7 +28,7 @@ fn main() {
             lower += 1;
         }
     }
-    let min = nums[lower..upper+1].iter().min().unwrap();
-    let max = nums[lower..upper+1].iter().max().unwrap();
+    let min = nums[lower..upper + 1].iter().min().unwrap();
+    let max = nums[lower..upper + 1].iter().max().unwrap();
     println!("Part 2: {}", min + max);
 }

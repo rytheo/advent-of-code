@@ -1,6 +1,6 @@
 use itertools::Itertools;
 use num_integer::Integer;
-use std::{fs, cmp::Ordering};
+use std::{cmp::Ordering, fs};
 
 #[derive(Clone)]
 struct Moon {
@@ -18,7 +18,7 @@ impl Moon {
 
     fn energy(&self) -> u32 {
         self.pos.iter().map(|p| p.unsigned_abs()).sum::<u32>()
-        * self.vel.iter().map(|v| v.unsigned_abs()).sum::<u32>()
+            * self.vel.iter().map(|v| v.unsigned_abs()).sum::<u32>()
     }
 }
 
@@ -35,7 +35,7 @@ fn step(moons: &mut [Moon], dims: &[usize]) {
                     moons[a].vel[i] -= 1;
                     moons[b].vel[i] += 1;
                 }
-                Ordering::Equal => {},
+                Ordering::Equal => {}
             }
         }
     }
@@ -53,7 +53,12 @@ fn find_period(moons: &mut [Moon], dim: usize) -> u64 {
     loop {
         t += 1;
         step(moons, &[dim]);
-        if moons.iter().map(|m| (m.pos[dim], m.vel[dim])).collect::<Vec<_>>() == initial {
+        if moons
+            .iter()
+            .map(|m| (m.pos[dim], m.vel[dim]))
+            .collect::<Vec<_>>()
+            == initial
+        {
             return t;
         }
     }
@@ -61,17 +66,26 @@ fn find_period(moons: &mut [Moon], dim: usize) -> u64 {
 
 fn main() {
     let text = fs::read_to_string("../input/2019/input_12.txt").unwrap();
-    let moons: Vec<_> = text.lines().map(|line| {
-        let pos = line.split(|c| "<xyz=, >".contains(c))
-            .filter_map(|s| s.parse().ok())
-            .collect();
-        Moon::new(pos)
-    }).collect();
+    let moons: Vec<_> = text
+        .lines()
+        .map(|line| {
+            let pos = line
+                .split(|c| "<xyz=, >".contains(c))
+                .filter_map(|s| s.parse().ok())
+                .collect();
+            Moon::new(pos)
+        })
+        .collect();
     let mut moons_p1 = moons.clone();
     for _ in 0..1000 {
         step(&mut moons_p1, &[0, 1, 2]);
     }
-    println!("Part 1: {}", moons_p1.iter().map(|m| m.energy()).sum::<u32>());
-    let periods: Vec<_> = (0..3).map(|dim| find_period(&mut moons.clone(), dim)).collect();
+    println!(
+        "Part 1: {}",
+        moons_p1.iter().map(|m| m.energy()).sum::<u32>()
+    );
+    let periods: Vec<_> = (0..3)
+        .map(|dim| find_period(&mut moons.clone(), dim))
+        .collect();
     println!("Part 2: {}", periods.iter().fold(1, |a, b| a.lcm(b)));
 }

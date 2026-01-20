@@ -8,24 +8,31 @@ fn autocomplete(line: &str) -> Result<u64, u64> {
             b'(' | b'[' | b'{' | b'<' => stack.push(byte),
             close => match stack.last() {
                 // Check matching brackets by comparing ASCII value difference
-                Some(&open) if open < close && close - open < 3 => { stack.pop(); }
-                _ => return Err(match close {
-                    b')' => 3,
-                    b']' => 57,
-                    b'}' => 1197,
-                    b'>' => 25137,
-                    _ => panic!("Invalid byte"),
-                }),
-            }
+                Some(&open) if open < close && close - open < 3 => {
+                    stack.pop();
+                }
+                _ => {
+                    return Err(match close {
+                        b')' => 3,
+                        b']' => 57,
+                        b'}' => 1197,
+                        b'>' => 25137,
+                        _ => panic!("Invalid byte"),
+                    })
+                }
+            },
         }
     }
     // Calculate auto-completion score
-    Ok(stack.iter().rfold(0, |acc, &open| 5 * acc + match open {
-        b'(' => 1,
-        b'[' => 2,
-        b'{' => 3,
-        b'<' => 4,
-        _ => panic!("Invalid byte"),
+    Ok(stack.iter().rfold(0, |acc, &open| {
+        5 * acc
+            + match open {
+                b'(' => 1,
+                b'[' => 2,
+                b'{' => 3,
+                b'<' => 4,
+                _ => panic!("Invalid byte"),
+            }
     }))
 }
 

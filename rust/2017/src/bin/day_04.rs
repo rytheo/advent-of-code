@@ -1,12 +1,15 @@
-use std::fs;
-use itertools::Itertools;
 use aoc::counter::Counter;
+use itertools::Itertools;
+use std::fs;
 
 fn validate(s: &str, anagrams_ok: bool) -> bool {
-    let counter: Counter<_> = s.split_whitespace().map(|w| match anagrams_ok {
-        true => w.to_owned(),
-        false => w.chars().sorted().collect::<String>()
-    }).collect();
+    let counter: Counter<_> = s
+        .split_whitespace()
+        .map(|w| match anagrams_ok {
+            true => w.to_owned(),
+            false => w.chars().sorted().collect::<String>(),
+        })
+        .collect();
     counter.values().all(|&v| v < 2)
 }
 

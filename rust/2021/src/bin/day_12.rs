@@ -1,9 +1,14 @@
-use std::fs;
 use std::collections::{HashMap, HashSet};
+use std::fs;
 
 type Graph<'a> = HashMap<&'a str, Vec<&'a str>>;
 
-fn explore<'a>(graph: &Graph<'a>, visited: &mut HashSet<&'a str>, current: &'a str, extra_time: bool) -> usize {
+fn explore<'a>(
+    graph: &Graph<'a>,
+    visited: &mut HashSet<&'a str>,
+    current: &'a str,
+    extra_time: bool,
+) -> usize {
     if current == "end" {
         return 1;
     }

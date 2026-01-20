@@ -1,5 +1,5 @@
-use std::fs;
 use aoc::counter::Counter;
+use std::fs;
 
 fn single_diff(a: &str, b: &str) -> Option<usize> {
     let (a, b) = (a.as_bytes(), b.as_bytes());
@@ -30,10 +30,10 @@ fn main() {
     }
     println!("Part 1: {}", two * three);
     for i in 0..ids.len() {
-        for j in i+1..ids.len() {
+        for j in i + 1..ids.len() {
             let (a, b) = (ids[i], ids[j]);
             if let Some(k) = single_diff(a, b) {
-                println!("Part 2: {}{}", &a[..k], &a[k+1..]);
+                println!("Part 2: {}{}", &a[..k], &a[k + 1..]);
                 return;
             }
         }

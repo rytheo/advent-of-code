@@ -1,7 +1,7 @@
-use std::collections::HashMap;
-use std::fs;
 use aoc::geometry::Vector;
 use aoc::vecN;
+use std::collections::HashMap;
+use std::fs;
 
 fn main() {
     let text = fs::read_to_string("../input/2017/input_03.txt").unwrap();
@@ -21,8 +21,10 @@ fn main() {
             here += delta;
             square += 1;
             if p2.is_none() {
-                let value = here.neighbors()
-                    .map(|p| grid.get(&p).copied().unwrap_or(0)).sum();
+                let value = here
+                    .neighbors()
+                    .map(|p| grid.get(&p).copied().unwrap_or(0))
+                    .sum();
                 grid.insert(here, value);
                 if value > input {
                     p2 = Some(value);

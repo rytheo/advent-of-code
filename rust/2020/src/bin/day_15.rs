@@ -19,7 +19,11 @@ fn play(nums: &[usize], target: usize) -> usize {
 
 fn main() {
     let input = fs::read_to_string("../input/2020/input_15.txt").unwrap();
-    let nums: Vec<_> = input.trim().split(',').map(|s| s.parse().unwrap()).collect();
+    let nums: Vec<_> = input
+        .trim()
+        .split(',')
+        .map(|s| s.parse().unwrap())
+        .collect();
     println!("Part 1: {}", play(&nums, 2020));
     println!("Part 2: {}", play(&nums, 30_000_000));
 }

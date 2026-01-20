@@ -16,7 +16,8 @@ fn run(offsets: &[isize], strange: bool) -> usize {
 
 fn main() {
     let input = fs::read_to_string("../input/2017/input_05.txt").unwrap();
-    let offsets = input.lines()
+    let offsets = input
+        .lines()
         .map(|s| s.parse().unwrap())
         .collect::<Vec<isize>>();
     for (i, strange) in [(1, false), (2, true)] {

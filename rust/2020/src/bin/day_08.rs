@@ -27,7 +27,7 @@ fn run(program: &[(&str, i32)], acc_on_loop: bool) -> Option<i32> {
             return match acc_on_loop {
                 true => Some(acc),
                 false => None,
-            }
+            };
         }
         visited[i] = true;
         let (op, n) = program[i];
@@ -43,10 +43,13 @@ fn run(program: &[(&str, i32)], acc_on_loop: bool) -> Option<i32> {
 
 fn main() {
     let input = fs::read_to_string("../input/2020/input_08.txt").unwrap();
-    let mut program: Vec<_> = input.lines().map(|line| {
-        let tokens: Vec<_> = line.split(' ').collect();
-        (tokens[0], tokens[1].parse::<i32>().unwrap())
-    }).collect();
+    let mut program: Vec<_> = input
+        .lines()
+        .map(|line| {
+            let tokens: Vec<_> = line.split(' ').collect();
+            (tokens[0], tokens[1].parse::<i32>().unwrap())
+        })
+        .collect();
     println!("Part 1: {}", run(&program, true).unwrap());
     println!("Part 2: {}", fix(&mut program));
 }

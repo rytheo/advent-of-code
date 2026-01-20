@@ -35,7 +35,7 @@ fn main() {
                         min_dist = d;
                         nearest.clear();
                         nearest.push(p);
-                    },
+                    }
                     Ordering::Equal => nearest.push(p),
                     Ordering::Greater => (),
                 }
@@ -50,9 +50,17 @@ fn main() {
             }
         }
     }
-    let area = areas.iter().filter_map(|(p, &area)| {
-        if inf_points.contains(p) { None } else { Some(area) }
-    }).max().unwrap();
+    let area = areas
+        .iter()
+        .filter_map(|(p, &area)| {
+            if inf_points.contains(p) {
+                None
+            } else {
+                Some(area)
+            }
+        })
+        .max()
+        .unwrap();
     println!("Part 1: {}", area);
 
     let mut region_size = 0u32;

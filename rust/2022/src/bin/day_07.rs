@@ -27,6 +27,10 @@ fn main() {
     println!("Part 1: {small_sum}");
     let free_space = TOTAL_DISK_SPACE - dir_sizes["/"];
     let min_to_free = UPDATE_SIZE - free_space;
-    let dir_size = dir_sizes.values().filter(|&&v| v >= min_to_free).min().unwrap();
+    let dir_size = dir_sizes
+        .values()
+        .filter(|&&v| v >= min_to_free)
+        .min()
+        .unwrap();
     println!("Part 2: {dir_size}");
 }

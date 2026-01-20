@@ -1,5 +1,5 @@
-use std::fs;
 use aoc::counter::Counter;
+use std::fs;
 
 fn count_intersections(lines: &[(i32, i32, i32, i32)], diag_ok: bool) -> usize {
     let mut grid: Counter<(i32, i32)> = Counter::new();
@@ -21,12 +21,16 @@ fn count_intersections(lines: &[(i32, i32, i32, i32)], diag_ok: bool) -> usize {
 
 fn main() {
     let input = fs::read_to_string("../input/2021/input_05.txt").unwrap();
-    let lines: Vec<_> = input.lines().map(|line| {
-        let nums: Vec<i32> = line.split(&[' ', '-', '>', ','][..])
-            .filter_map(|s| s.parse().ok())
-            .collect();
-        (nums[0], nums[1], nums[2], nums[3])
-    }).collect();
+    let lines: Vec<_> = input
+        .lines()
+        .map(|line| {
+            let nums: Vec<i32> = line
+                .split(&[' ', '-', '>', ','][..])
+                .filter_map(|s| s.parse().ok())
+                .collect();
+            (nums[0], nums[1], nums[2], nums[3])
+        })
+        .collect();
     println!("Part 1: {}", count_intersections(&lines, false));
     println!("Part 2: {}", count_intersections(&lines, true));
 }

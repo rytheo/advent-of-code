@@ -1,11 +1,12 @@
+use aoc::counter::Counter;
 use std::collections::HashSet;
 use std::fs;
-use aoc::counter::Counter;
 
 fn find_adj(deltas: &[Vec<i32>], cell: &[i32]) -> Vec<Vec<i32>> {
-    deltas.iter().map(|delta| {
-        cell.iter().zip(delta).map(|(x, d)| x + d).collect()
-    }).collect()
+    deltas
+        .iter()
+        .map(|delta| cell.iter().zip(delta).map(|(x, d)| x + d).collect())
+        .collect()
 }
 
 fn simulate(text: &str, deltas: &[Vec<i32>]) -> usize {
@@ -29,9 +30,16 @@ fn simulate(text: &str, deltas: &[Vec<i32>]) -> usize {
             }
         }
         // Compute next cycle based on adjacency counts
-        active = activity.into_iter().filter_map(|(cell, count)| {
-            if count == 3 || count == 2 && active.contains(&cell) { Some(cell) } else { None }
-        }).collect();
+        active = activity
+            .into_iter()
+            .filter_map(|(cell, count)| {
+                if count == 3 || count == 2 && active.contains(&cell) {
+                    Some(cell)
+                } else {
+                    None
+                }
+            })
+            .collect();
     }
     active.len()
 }
@@ -39,8 +47,12 @@ fn simulate(text: &str, deltas: &[Vec<i32>]) -> usize {
 fn main() {
     let input = fs::read_to_string("../input/2020/input_17.txt").unwrap();
     let d = [0, -1, 1];
-    let d3: Vec<_> = (1..27).map(|i| vec![d[i % 3], d[i / 3 % 3], d[i / 9 % 3]]).collect();
-    let d4: Vec<_> = (1..81).map(|i| vec![d[i % 3], d[i / 3 % 3], d[i / 9 % 3], d[i / 27 % 3]]).collect();
+    let d3: Vec<_> = (1..27)
+        .map(|i| vec![d[i % 3], d[i / 3 % 3], d[i / 9 % 3]])
+        .collect();
+    let d4: Vec<_> = (1..81)
+        .map(|i| vec![d[i % 3], d[i / 3 % 3], d[i / 9 % 3], d[i / 27 % 3]])
+        .collect();
     println!("Part 1: {}", simulate(&input, &d3));
     println!("Part 2: {}", simulate(&input, &d4));
 }

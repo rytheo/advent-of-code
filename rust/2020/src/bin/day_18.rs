@@ -1,6 +1,6 @@
 use std::fs;
-use Token::*;
 use Operator::*;
+use Token::*;
 
 enum Token {
     Num(u64),
@@ -33,10 +33,12 @@ fn eval(expr: &[Token], advanced: bool) -> u64 {
                 stack.push(token);
             }
             // Pop tokens into the queue until the next left parenthesis
-            RightParen => while let Some(t) = stack.pop() {
-                match t {
-                    LeftParen => break,
-                    _ => queue.push(t),
+            RightParen => {
+                while let Some(t) = stack.pop() {
+                    match t {
+                        LeftParen => break,
+                        _ => queue.push(t),
+                    }
                 }
             }
         }
@@ -64,16 +66,27 @@ fn eval(expr: &[Token], advanced: bool) -> u64 {
 
 fn main() {
     let input = fs::read_to_string("../input/2020/input_18.txt").unwrap();
-    let exprs: Vec<Vec<_>> = input.lines().map(|s| {
-        s.chars().filter_map(|c| match c {
-            ' ' => None,
-            '(' => Some(LeftParen),
-            ')' => Some(RightParen),
-            '+' => Some(Op(Add)),
-            '*' => Some(Op(Mul)),
-            _ => Some(Num(c.to_digit(10).unwrap() as u64)),
-        }).collect()
-    }).collect();
-    println!("Part 1: {}", exprs.iter().map(|v| eval(v, false)).sum::<u64>());
-    println!("Part 2: {}", exprs.iter().map(|v| eval(v, true)).sum::<u64>());
+    let exprs: Vec<Vec<_>> = input
+        .lines()
+        .map(|s| {
+            s.chars()
+                .filter_map(|c| match c {
+                    ' ' => None,
+                    '(' => Some(LeftParen),
+                    ')' => Some(RightParen),
+                    '+' => Some(Op(Add)),
+                    '*' => Some(Op(Mul)),
+                    _ => Some(Num(c.to_digit(10).unwrap() as u64)),
+                })
+                .collect()
+        })
+        .collect();
+    println!(
+        "Part 1: {}",
+        exprs.iter().map(|v| eval(v, false)).sum::<u64>()
+    );
+    println!(
+        "Part 2: {}",
+        exprs.iter().map(|v| eval(v, true)).sum::<u64>()
+    );
 }

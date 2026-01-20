@@ -1,8 +1,8 @@
-use std::fs;
+use aoc::geometry::Vector;
+use aoc::vecN;
 use std::cmp::Reverse;
 use std::collections::{BinaryHeap, HashMap};
-use aoc::vecN;
-use aoc::geometry::Vector;
+use std::fs;
 
 fn shortest_path(grid: &HashMap<Vector<2>, u32>) -> u32 {
     let &corner = grid.keys().max_by_key(|p| p[0] + p[1]).unwrap();
@@ -28,10 +28,15 @@ fn shortest_path(grid: &HashMap<Vector<2>, u32>) -> u32 {
 
 fn main() {
     let input = fs::read_to_string("../input/2021/input_15.txt").unwrap();
-    let mut grid: HashMap<_, _> = input.lines().enumerate().flat_map(|(y, line)| {
-        line.bytes().enumerate()
-            .map(move |(x, b)| (vecN!(x as i32, y as i32), (b - b'0') as u32))
-    }).collect();
+    let mut grid: HashMap<_, _> = input
+        .lines()
+        .enumerate()
+        .flat_map(|(y, line)| {
+            line.bytes()
+                .enumerate()
+                .map(move |(x, b)| (vecN!(x as i32, y as i32), (b - b'0') as u32))
+        })
+        .collect();
     println!("Part 1: {}", shortest_path(&grid));
     // Make the grid bigger
     let corner = grid.keys().max_by_key(|p| p[0] + p[1]).unwrap();
@@ -47,7 +52,7 @@ fn main() {
                 grid.insert(
                     vecN!(point[0] + width * x_scale, point[1] + height * y_scale),
                     // Sub 1, mod 9, add 1 since we need digits in 1-9 inclusive
-                    (risk + (x_scale + y_scale) as u32 - 1) % 9 + 1
+                    (risk + (x_scale + y_scale) as u32 - 1) % 9 + 1,
                 );
             }
         }

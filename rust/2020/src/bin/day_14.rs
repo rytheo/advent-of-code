@@ -42,7 +42,7 @@ fn run(program: &[&str], advanced: bool) -> u64 {
         if op == "mask" {
             mask = val;
         } else {
-            let addr = op[4..op.len()-1].parse().unwrap();
+            let addr = op[4..op.len() - 1].parse().unwrap();
             let val = val.parse().unwrap();
             match advanced {
                 false => write_1(&mut mem, addr, val, mask),

@@ -27,7 +27,10 @@ fn main() {
     let input = fs::read_to_string("../input/2021/input_03.txt").unwrap();
     let lines: Vec<_> = input.lines().collect();
     let tracker = get_deltas(&lines);
-    let gamma: u32 = tracker.iter().rev().enumerate()
+    let gamma: u32 = tracker
+        .iter()
+        .rev()
+        .enumerate()
         .map(|(i, &b)| if b > 0 { 1 << i } else { 0 })
         .sum();
     let epsilon = !gamma & ((1 << tracker.len()) - 1);

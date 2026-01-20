@@ -1,19 +1,21 @@
+use derive_more::{Deref, DerefMut};
 use std::borrow::Borrow;
 use std::collections::HashMap;
 use std::hash::Hash;
 use std::ops::{Index, IndexMut};
-use derive_more::{Deref, DerefMut};
 
 static ZERO: usize = 0;
 
 #[derive(Clone, Debug, Default, Deref, DerefMut)]
 pub struct Counter<T> {
-    map: HashMap<T, usize>
+    map: HashMap<T, usize>,
 }
 
 impl<T> Counter<T> {
     pub fn new() -> Self {
-        Counter { map: HashMap::new() }
+        Counter {
+            map: HashMap::new(),
+        }
     }
 }
 

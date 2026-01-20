@@ -14,7 +14,7 @@ fn main() {
         if a <= c_count && c_count <= b {
             total_1 += 1;
         }
-        if (password[a-1] == c) != (password[b-1] == c) {
+        if (password[a - 1] == c) != (password[b - 1] == c) {
             total_2 += 1;
         }
     }

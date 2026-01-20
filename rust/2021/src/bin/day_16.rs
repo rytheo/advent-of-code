@@ -1,6 +1,6 @@
 use std::fs;
-use std::num::ParseIntError;
 use std::iter;
+use std::num::ParseIntError;
 
 struct PacketMeta {
     version_sum: u32,
@@ -15,7 +15,10 @@ struct Cursor<'a> {
 
 impl<'a> Cursor<'a> {
     fn new(s: &'a str) -> Self {
-        Self { slice: s, bits_read: 0 }
+        Self {
+            slice: s,
+            bits_read: 0,
+        }
     }
 
     fn read(&mut self, n: usize) -> &'a str {
@@ -45,7 +48,11 @@ fn parse_packet(bits: &str) -> Result<PacketMeta, ParseIntError> {
         let mut subpacket_bits = 0;
         let mut subpacket_count = 0;
         let mut vals = iter::from_fn(|| {
-            let tracker = if length_type_id == "0" { subpacket_bits } else { subpacket_count };
+            let tracker = if length_type_id == "0" {
+                subpacket_bits
+            } else {
+                subpacket_count
+            };
             if tracker >= val {
                 return None;
             }
@@ -76,7 +83,8 @@ fn parse_packet(bits: &str) -> Result<PacketMeta, ParseIntError> {
 
 fn main() {
     let input = fs::read_to_string("../input/2021/input_16.txt").unwrap();
-    let bits: String = input.chars()
+    let bits: String = input
+        .chars()
         .filter_map(|c| c.to_digit(16).map(|x| format!("{:04b}", x)))
         .collect();
     let meta = parse_packet(&bits).unwrap();

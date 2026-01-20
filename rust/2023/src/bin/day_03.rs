@@ -59,7 +59,7 @@ fn main() {
     println!("Part 1: {part_sum}");
     let gear_ratio_sum: u32 = gear_map
         .values()
-        .filter(|&nums| (nums.len() == 2))
+        .filter(|&nums| nums.len() == 2)
         .map(|nums| nums.iter().product::<u32>())
         .sum();
     println!("Part 2: {gear_ratio_sum}");

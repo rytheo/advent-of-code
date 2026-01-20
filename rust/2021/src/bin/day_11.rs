@@ -1,6 +1,6 @@
-use std::fs;
+use aoc::geometry::{vecN, Vector};
 use std::collections::{HashMap, HashSet};
-use aoc::geometry::{Vector, vecN};
+use std::fs;
 
 fn step(octopi: &mut HashMap<Vector<2>, u8>) -> usize {
     // Increase all energy by 1
@@ -41,7 +41,10 @@ fn main() {
             octopi.insert(vecN!(x as i32, y as i32), digit - b'0');
         }
     }
-    println!("Part 1: {}", (0..100).map(|_| step(&mut octopi)).sum::<usize>());
+    println!(
+        "Part 1: {}",
+        (0..100).map(|_| step(&mut octopi)).sum::<usize>()
+    );
     for n in 101.. {
         if step(&mut octopi) == octopi.len() {
             println!("Part 2: {}", n);

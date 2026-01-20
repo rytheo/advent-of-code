@@ -1,10 +1,15 @@
 use std::fs;
 
 use Cardinal::*;
-use Relative::*;
 use Direction::*;
+use Relative::*;
 
-enum Cardinal { East, South, West, North }
+enum Cardinal {
+    East,
+    South,
+    West,
+    North,
+}
 
 impl Cardinal {
     fn apply(&self, loc: (i32, i32), val: i32) -> (i32, i32) {
@@ -18,7 +23,10 @@ impl Cardinal {
     }
 }
 
-enum Relative { Left, Right }
+enum Relative {
+    Left,
+    Right,
+}
 
 impl Relative {
     fn sign(&self) -> i32 {
@@ -63,10 +71,7 @@ fn run_2(steps: &[(Direction, i32)]) -> i32 {
     for (dir, val) in steps {
         match dir {
             Card(c) => wp_loc = c.apply(wp_loc, *val),
-            Fwd => ship_loc = (
-                ship_loc.0 + val * wp_loc.0,
-                ship_loc.1 + val * wp_loc.1,
-            ),
+            Fwd => ship_loc = (ship_loc.0 + val * wp_loc.0, ship_loc.1 + val * wp_loc.1),
             Rel(d) => {
                 for _ in 0..(val / 90) {
                     wp_loc = (d.sign() * -wp_loc.1, d.sign() * wp_loc.0);
@@ -79,19 +84,22 @@ fn run_2(steps: &[(Direction, i32)]) -> i32 {
 
 fn main() {
     let input = fs::read_to_string("../input/2020/input_12.txt").unwrap();
-    let steps: Vec<_> = input.lines().map(|s| {
-        let dir = match &s[..1] {
-            "E" => Card(East),
-            "S" => Card(South),
-            "W" => Card(West),
-            "N" => Card(North),
-            "L" => Rel(Left),
-            "R" => Rel(Right),
-            "F" => Fwd,
-            s => panic!("Unknown action: {}", s),
-        };
-        (dir, s[1..].parse().unwrap())
-    }).collect();
+    let steps: Vec<_> = input
+        .lines()
+        .map(|s| {
+            let dir = match &s[..1] {
+                "E" => Card(East),
+                "S" => Card(South),
+                "W" => Card(West),
+                "N" => Card(North),
+                "L" => Rel(Left),
+                "R" => Rel(Right),
+                "F" => Fwd,
+                s => panic!("Unknown action: {}", s),
+            };
+            (dir, s[1..].parse().unwrap())
+        })
+        .collect();
     println!("Part 1: {}", run_1(&steps));
     println!("Part 2: {}", run_2(&steps));
 }
